@@ -13,6 +13,8 @@ No notes.
 
 ## Pre-training Day 2
 
+### Set-up
+
 ```{r}
 #| echo: false
 #| output: false
@@ -23,10 +25,12 @@ No notes.
 
 library(tidyverse)
 library(palmerpenguins)
+library(ggplot2)
 data(penguins) # load data
 df <- penguins
 ```
 
+### Load palmer penguins data
 
 ```{r}
 #| echo: true
@@ -34,4 +38,16 @@ df <- penguins
 #| warning: false
 glimpse(df) # get a glimpse of the data
 dim(df) # gather the dimensions of the data
+summary(df) # gather a summary of the data
 ```
+
+### Create a graph using ggplot
+
+```{r}
+#| echo: true
+#| output: true
+#| warning: false
+
+
+```
+
