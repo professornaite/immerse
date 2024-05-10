@@ -16,8 +16,9 @@ format: html
 #| output: true
 #| warning: false
 
-install.packages(c("tidyverse",
-                   "palmerpenguins"))
+# install.packages("tidyverse", repos = "http://cran.us.r-project.org")
+# install.packages("palmerpenguins", repos = "http://cran.us.r-project.org")
+
 library(tidyverse)
 library(palmerpenguins)
 ```
