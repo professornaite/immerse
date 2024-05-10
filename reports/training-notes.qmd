@@ -7,7 +7,9 @@ institute:
 format: html
 ---
 
-## Day 3
+## Pre-training Day 1
+
+No notes.
 
 ## Pre-training Day 2
 
@@ -21,8 +23,15 @@ format: html
 
 library(tidyverse)
 library(palmerpenguins)
+data(penguins) # load data
+df <- penguins
 ```
 
-## Pre-training Day 1
 
-No notes.
+```{r}
+#| echo: true
+#| output: true
+#| warning: false
+glimpse(df) # get a glimpse of the data
+dim(df) # gather the dimenions of the data
+```
