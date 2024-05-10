@@ -1,2 +1,3 @@
-# immerse
-mixture model training
+# IMMERSE
+
+Mixture models training notes and exercises
