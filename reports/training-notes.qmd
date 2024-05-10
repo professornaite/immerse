@@ -9,15 +9,19 @@ format: html
 
 ## Day 3
 
-## Day 2
+## Pre-training Day 2
 
 ```{r}
 #| echo: false
 #| output: true
 #| warning: false
-1 + 1
+
+install.packages(c("tidyverse",
+                   "palmerpenguins"))
+library(tidyverse)
+library(palmerpenguins)
 ```
 
-## Day 1
+## Pre-training Day 1
 
 No notes.
