@@ -33,5 +33,5 @@ df <- penguins
 #| output: true
 #| warning: false
 glimpse(df) # get a glimpse of the data
-dim(df) # gather the dimenions of the data
+dim(df) # gather the dimensions of the data
 ```
