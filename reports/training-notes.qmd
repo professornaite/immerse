@@ -9,7 +9,7 @@ format: html
 
 ## Pre-training Day 1
 
-No notes.
+No relevant coding notes.
 
 ## Pre-training Day 2
 
@@ -30,7 +30,7 @@ data(penguins) # load data
 df <- penguins
 ```
 
-### Load palmer penguins data
+#### Load palmer penguins data
 
 ```{r}
 #| echo: true
@@ -38,16 +38,28 @@ df <- penguins
 #| warning: false
 glimpse(df) # get a glimpse of the data
 dim(df) # gather the dimensions of the data
+names(df) # gather names of variables
 summary(df) # gather a summary of the data
+
 ```
 
-### Create a graph using ggplot
+#### Create a graph using ggplot
 
+Steps to create plot
+
+  1. ggplot()
+  
+  2. Data, variable `x`, and variable `y`
+  
+  3. What type of graph?
+  
 ```{r}
 #| echo: true
 #| output: true
 #| warning: false
 
+ggplot(data = df, aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point()
 
 ```
 

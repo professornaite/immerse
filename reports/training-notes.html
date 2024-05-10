@@ -113,15 +113,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="pre-training-day-1" class="level2">
 <h2 class="anchored" data-anchor-id="pre-training-day-1">Pre-training Day 1</h2>
-<p>No notes.</p>
+<p>No relevant coding notes.</p>
 </section>
 <section id="pre-training-day-2" class="level2">
 <h2 class="anchored" data-anchor-id="pre-training-day-2">Pre-training Day 2</h2>
 <section id="set-up" class="level3">
 <h3 class="anchored" data-anchor-id="set-up">Set-up</h3>
-</section>
-<section id="load-palmer-penguins-data" class="level3">
-<h3 class="anchored" data-anchor-id="load-palmer-penguins-data">Load palmer penguins data</h3>
+<section id="load-palmer-penguins-data" class="level4">
+<h4 class="anchored" data-anchor-id="load-palmer-penguins-data">Load palmer penguins data</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(df) <span class="co"># get a glimpse of the data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -140,7 +139,13 @@ $ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 344   8</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df) <span class="co"># gather a summary of the data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df) <span class="co"># gather names of variables</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "species"           "island"            "bill_length_mm"   
+[4] "bill_depth_mm"     "flipper_length_mm" "body_mass_g"      
+[7] "sex"               "year"             </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df) <span class="co"># gather a summary of the data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      species          island    bill_length_mm  bill_depth_mm  
  Adelie   :152   Biscoe   :168   Min.   :32.10   Min.   :13.10  
@@ -161,9 +166,26 @@ $ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 
 </div>
 </div>
 </section>
-<section id="create-a-graph-using-ggplot" class="level3">
-<h3 class="anchored" data-anchor-id="create-a-graph-using-ggplot">Create a graph using ggplot</h3>
-<p>#| echo: true #| output: true #| warning: false</p>
+<section id="create-a-graph-using-ggplot" class="level4">
+<h4 class="anchored" data-anchor-id="create-a-graph-using-ggplot">Create a graph using ggplot</h4>
+<p>Steps to create plot</p>
+<ol type="1">
+<li><p>ggplot()</p></li>
+<li><p>Data, variable <code>x</code>, and variable <code>y</code></p></li>
+<li><p>What type of graph?</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> df, <span class="fu">aes</span>(<span class="at">x =</span> flipper_length_mm, <span class="at">y =</span> body_mass_g)) <span class="sc">+</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 2 rows containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="training-notes_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
 </section>
 </section>
 
