@@ -59,7 +59,34 @@ Steps to create plot
 #| warning: false
 
 ggplot(data = df, aes(x = flipper_length_mm, y = body_mass_g)) +
-  geom_point()
+  geom_point() -> plot1
+plot1
 
 ```
+
+## Pre-training Day 3
+
+No relevant coding notes. Focus was on `dplyr` and `tidyverse` with Palmer Penguins.
+
+## Pre-training Day 4
+
+### Working with Mplus
+
+Please see notes in forked files.
+
+Please clean HSLS data.
+
+## Pre-training Day 5
+
+A few reminders:
+
+  - Any variables with arrows pointing to them are dependent or endogenous variables.
+
+  - Any variable that is independent is an exogenous variable.
+
+  - Do not identify categorial independent/exogenous variables as `categorial` in the variable command in MPlus.
+
+Categorical coding
+
+Binary observed variable with LRV parameterization
 
