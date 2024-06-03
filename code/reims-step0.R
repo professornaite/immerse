@@ -13,10 +13,9 @@ tail(reims)
 reims %>% 
   mutate_at(c(2:54), funs(recode(., `1`=0, `2`=0, `3`=1, `4`=1, .default = NaN))) -> reims.dummy
 reims.dummy
-df <- reims.dummy
-str(df)
+
 # label of factors
-# math identity: mathperson1 mathperson2 mathperson3 mathperson4 dislikemath pursuestem 
+# math identity: mathperson1 mathperson2 mathperson3 mathperson4 dislikemathclass pursuestem 
 # racial ethnic identity: learnrace knowrace proudrace unclearrace dontknowrace belongrace understandrace talkrace priderace practicerace strongrace feelrace
 # caring relations at school: adultcares adultnotices adultlistens
 # high expectations at school: adultgood adultbest adultsuccess
@@ -25,7 +24,13 @@ str(df)
 # racial belonging: closerace belongrace raceidentity raceeffects raceproud racehappy
 
 # subset the dichotomous data
-test.df <- df %>% 
+test.df <- reims.dummy %>% 
   select(c(1:54), age, sex, race) %>% 
-  relocate(groupflag, age, sex, race)
-test.df
+  relocate(groupflag, age, sex, race) %>% 
+  drop_na()
+test.df 
+
+# check for missing data
+test.df %>% 
+  count() # count observations
+sapply(test.df, function(x) sum(is.na(x)))
