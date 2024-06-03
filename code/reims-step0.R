@@ -34,3 +34,5 @@ test.df
 test.df %>% 
   count() # count observations
 sapply(test.df, function(x) sum(is.na(x)))
+
+write_csv(test.df, "/Users/nathanalexander/Dropbox/Projects/immerse/data/reims_clean.csv")
