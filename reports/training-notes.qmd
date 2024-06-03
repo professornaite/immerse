@@ -34,6 +34,10 @@ Despite us carefully thinking about the content and domain of our models, we nee
 
 Where a factor analysis asks "Which items *hang* together?" we are asking different questions here. If we have a larger number of indicators which strong correlations, the latent class variables is trying to explain as much shared variance as possible.
 
+
+The classes that emerge are directly related to the items that you include.
+
+
 ## Pre-training Day 1
 
 No relevant coding notes.

@@ -9,5 +9,7 @@ View(reims)
 head(reims)
 tail(reims)
 
-# remove missing data
-
+# create dichotomous indicators
+reims %>% 
+  mutate_at(c(2:54), funs(recode(., `1`=0, `2`=0, `3`=1, `4`=1, .default = NaN))) -> reims.dummy
+reims.dummy
