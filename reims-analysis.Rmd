@@ -1,0 +1,44 @@
+---
+title: "REIMS sample analysis"
+author: "Nathan Alexander"
+date: "2024-06-03"
+output: 
+  html_document:
+    theme: flatly
+editor_options:
+  markdown:
+    wrap: sentence
+---
+
+### Set up `MPlusAutomation`
+
+```{r, eval = FALSE}
+install.packages("devtools")
+library(devtools)
+
+install_github("michaelhallquist/MplusAutomation")
+```
+
+### Load packages
+
+```{r}
+library(MplusAutomation)
+library(tidyverse) #collection of R packages designed for data science
+library(here) #helps with filepaths
+library(janitor) #clean_names
+library(gt) # creates tables
+library(DiagrammeR) # create path diagrams
+here::i_am("reims-analysis.Rmd")
+```
+
+
+### Data
+
+```{r}
+reims <- read_csv(here("data", "reims_clean.csv"))
+reims
+```
+This file is based in-part on resources provided at the Institute of Mixture Modeling for Equity-Oriented Researchers, Scholars, and Educators (2024).
+IMMERSE In-Person Training Workshop (IES No. 305B220021).
+Institute of Education Sciences.
+<https://immerse-ucsb.github.io/pre-training>
