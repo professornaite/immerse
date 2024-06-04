@@ -12,7 +12,7 @@ editor_options:
 
 ### Set up `MPlusAutomation`
 
-```{r, eval = FALSE}
+```{r, eval=F}
 install.packages("devtools")
 library(devtools)
 
@@ -21,11 +21,10 @@ install_github("michaelhallquist/MplusAutomation")
 
 ### Load packages
 
-```{r}
+```{r, echo=F, eval=T, warning=F}
 library(MplusAutomation)
 library(tidyverse) #collection of R packages designed for data science
 library(here) #helps with filepaths
-library(janitor) #clean_names
 library(gt) # creates tables
 library(DiagrammeR) # create path diagrams
 here::i_am("reims-analysis.Rmd")
@@ -88,14 +87,16 @@ table(reims$race)
 reims1 <- reims %>% 
   select(mathperson1, mathperson2, mathperson3, mathperson4)
 head(reims1, n=10)
+
+## add ids and covariates; tell mplus that what we are
+
 ```
 
 
-
-```{r, eval = TRUE}
+```{r, eval = T}
 
 input <- mplusObject(
-  TITLE = "REIMS Initial Model Run",
+  TITLE = "REIMS Mathematics Identity Model",
   VARIABLE = "categorical = mathperson1 mathperson2 mathperson3 mathperson4;
   usevar = mathperson1 mathperson2 mathperson3 mathperson4;
   classes = c(3);",
@@ -119,11 +120,21 @@ output <- mplusModeler(input,
 
 ```
 
+Take a look at the item probability plot:
+
+```{r}
+source(here("plot_lca.txt")) # custom function created by Dina to plot our lsa output
+
+model <- readModels(here("mplus", "reims1.out")) # read in output
+
+plot_lca(model_name = model) # there is an error with the non atomic measure columns
+``` 
 
 
+Show probability plot of data and then observe the different classes.
 
+---
 
-This file is based in-part on resources provided at the Institute of Mixture Modeling for Equity-Oriented Researchers, Scholars, and Educators (2024).
-IMMERSE In-Person Training Workshop (IES No. 305B220021).
+This file is based on resources provided at the Institute of Mixture Modeling for Equity-Oriented Researchers, Scholars, and Educators (2024). IMMERSE In-Person Training Workshop (IES No. 305B220021).
 Institute of Education Sciences.
 <https://immerse-ucsb.github.io/pre-training>

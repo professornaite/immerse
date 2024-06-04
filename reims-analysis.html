@@ -1598,43 +1598,31 @@ install_github(&quot;michaelhallquist/MplusAutomation&quot;)</code></pre>
 </div>
 <div id="load-packages" class="section level3">
 <h3>Load packages</h3>
-<pre class="r"><code>library(MplusAutomation)</code></pre>
 <pre><code>## Version:  1.2
 ## We work hard to write this free software. Please help us get credit by citing: 
 ## 
 ## Hallquist, M. N. &amp; Wiley, J. F. (2018). MplusAutomation: An R Package for Facilitating Large-Scale Latent Variable Analyses in Mplus. Structural Equation Modeling, 25, 621-638. doi: 10.1080/10705511.2017.1402334.
 ## 
 ## -- see citation(&quot;MplusAutomation&quot;).</code></pre>
-<pre class="r"><code>library(tidyverse) #collection of R packages designed for data science</code></pre>
 <pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ## ✔ dplyr     1.1.4     ✔ readr     2.1.5
 ## ✔ forcats   1.0.0     ✔ stringr   1.5.1
 ## ✔ ggplot2   3.5.0     ✔ tibble    3.2.1
 ## ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
-## ✔ purrr     1.0.2</code></pre>
-<pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## ✔ purrr     1.0.2     
+## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ tidyr::extract() masks MplusAutomation::extract()
 ## ✖ dplyr::filter()  masks stats::filter()
 ## ✖ dplyr::lag()     masks stats::lag()
-## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-<pre class="r"><code>library(here) #helps with filepaths</code></pre>
-<pre><code>## here() starts at /Users/nathanalexander/Dropbox/Projects/immerse</code></pre>
-<pre class="r"><code>library(janitor) #clean_names</code></pre>
-<pre><code>## 
-## Attaching package: &#39;janitor&#39;
+## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors
+## here() starts at /Users/nathanalexander/Dropbox/Projects/immerse
 ## 
-## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     chisq.test, fisher.test</code></pre>
-<pre class="r"><code>library(gt) # creates tables
-library(DiagrammeR) # create path diagrams
-here::i_am(&quot;reims-analysis.Rmd&quot;)</code></pre>
-<pre><code>## here() starts at /Users/nathanalexander/Dropbox/Projects/immerse</code></pre>
+## here() starts at /Users/nathanalexander/Dropbox/Projects/immerse</code></pre>
 </div>
 <div id="model" class="section level3">
 <h3>Model</h3>
-<div class="grViz html-widget html-fill-item" id="htmlwidget-bd0549c84696c24892a5" style="width:672px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-bd0549c84696c24892a5">{"x":{"diagram":" digraph model {\n\n# The `graph` statement - No editing needed\n\n    graph [layout = dot, overlap = true]\n \n# Two `node` statements\n \n# One for measured variables (box) \n\n    node [shape=box]\n    mathperson1 mathperson2 mathperson3 mathperson4;\n \n# One for latent variables (circle) \n \n    node [shape=circle]\n    lca [label=<Mathematics Identity <br/>M<sub>k<\/sub>>];\n    \n# `edge` statements\n \n    edge [minlen = 2]\n    lca -> {mathperson1 mathperson2 mathperson3 mathperson4}\n \n }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item" id="htmlwidget-05623809481446bb40cd" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-05623809481446bb40cd">{"x":{"diagram":" digraph model {\n\n# The `graph` statement - No editing needed\n\n    graph [layout = dot, overlap = true]\n \n# Two `node` statements\n \n# One for measured variables (box) \n\n    node [shape=box]\n    mathperson1 mathperson2 mathperson3 mathperson4;\n \n# One for latent variables (circle) \n \n    node [shape=circle]\n    lca [label=<Mathematics Identity <br/>M<sub>k<\/sub>>];\n    \n# `edge` statements\n \n    edge [minlen = 2]\n    lca -> {mathperson1 mathperson2 mathperson3 mathperson4}\n \n }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="data" class="section level3">
 <h3>Data</h3>
@@ -1808,8 +1796,9 @@ head(reims1, n=10)</code></pre>
 ##  8           0           0           0           0
 ##  9           0           0           0           0
 ## 10           0           0           0           0</code></pre>
+<pre class="r"><code>## add ids and covariates; tell mplus that what we are</code></pre>
 <pre class="r"><code>input &lt;- mplusObject(
-  TITLE = &quot;REIMS Initial Model Run&quot;,
+  TITLE = &quot;REIMS Mathematics Identity Model&quot;,
   VARIABLE = &quot;categorical = mathperson1 mathperson2 mathperson3 mathperson4;
   usevar = mathperson1 mathperson2 mathperson3 mathperson4;
   classes = c(3);&quot;,

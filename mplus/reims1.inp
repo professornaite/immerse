@@ -1,0 +1,18 @@
+TITLE:
+REIMS Mathematics Identity Model
+DATA:
+FILE = "/Users/nathanalexander/Dropbox/Projects/immerse/mplus/reims1.dat"; 
+VARIABLE:
+NAMES = mathperson1 mathperson2 mathperson3 mathperson4; 
+ MISSING=.;
+ categorical = mathperson1 mathperson2 mathperson3 mathperson4;
+  usevar = mathperson1 mathperson2 mathperson3 mathperson4;
+  classes = c(3);
+ANALYSIS:
+estimator = mlr;
+    type = mixture;
+OUTPUT:
+tech11 tech14;
+PLOT:
+type = plot3;
+    series = mathperson1-mathperson4(*);
