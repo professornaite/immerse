@@ -3,9 +3,9 @@ title: "REIMS sample analysis"
 author: "Nathan Alexander"
 date: "2024-06-03"
 output:
-  pdf_document: default
   html_document:
     theme: flatly
+  pdf_document: default
 editor_options:
   markdown:
     wrap: sentence
@@ -52,7 +52,7 @@ grViz(" digraph model {
 # One for latent variables (circle) 
  
     node [shape=circle]
-    lca [label=<Mathematics Identity <br/>M<sub>k</sub>>];
+    lca [label=<Mathematics Identity <br/>C<sub>k</sub>>];
     
 # `edge` statements
  
@@ -138,7 +138,7 @@ model <- readModels(here("mplus", "reims1.out")) # read in output
 plot_lca(model_name = model) # there is an error with the non atomic measure columns
 ``` 
 
-Show probability plot of data and then observe the different classes.
+Show probability plot of data and observe the different classes.
 
 ---
 

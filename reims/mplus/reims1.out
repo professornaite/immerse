@@ -1,13 +1,14 @@
 Mplus VERSION 8.11 (Mac)
 MUTHEN & MUTHEN
-06/04/2024   4:59 PM
+06/04/2024   5:31 PM
 
 INPUT INSTRUCTIONS
 
   TITLE:
   REIMS Mathematics Identity Model
   DATA:
-  FILE = "/Users/nathanalexander/Dropbox/Projects/immerse/mplus/reims1.dat";
+  FILE = "/Users/nathanalexander/Dropbox/Projects/immerse/reims/mplus/
+  reims1.dat";
   VARIABLE:
   NAMES = m1 m2 m3 m4;
    MISSING=.;
@@ -90,7 +91,7 @@ Random Starts Specifications
 Link                                                         LOGIT
 
 Input data file(s)
-  /Users/nathanalexander/Dropbox/Projects/immerse/mplus/reims1.dat
+  /Users/nathanalexander/Dropbox/Projects/immerse/reims/mplus/reims1.dat
 Input data format  FREE
 
 
@@ -440,8 +441,8 @@ The following plots are available:
   Scatterplots (sample values)
   Sample proportions and estimated probabilities
 
-     Beginning Time:  16:59:01
-        Ending Time:  16:59:01
+     Beginning Time:  17:31:40
+        Ending Time:  17:31:40
        Elapsed Time:  00:00:00
 
 
