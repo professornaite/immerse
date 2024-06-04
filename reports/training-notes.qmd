@@ -7,7 +7,6 @@ institute:
 format: html
 ---
 
-
 ## In-person Training Day 1
 
 ### Goals for today
@@ -37,7 +36,22 @@ Where a factor analysis asks "Which items *hang* together?" we are asking differ
 
 The classes that emerge are directly related to the items that you include.
 
+## In-person Training Day 2
 
+### Basic of the EM Algorithm
+
+  - Initialization: Start with an initial set of estimates for the parameters.
+  
+  - E-Step (Extraction step): Given the current parameter estimates, calculate the expected values of the latent variables or unobsered data.
+  
+  - M-step (Maximization step): Maximize the expected log-likelihood function by updating the parameter estimates based on the exepcted values obtained in the E-step.
+  
+  - Iteration: Repeate steps 2 and 3 until convergence, which is typically determined by a predefined convergence criterion. 
+
+*Goal is to find the parameter values that maximize the likelihood; the estimation "crawls along" with estimation to find "the peak."*
+
+  - Stopping criteria is neededd or it will iterate forever and you wil never get an output file.
+  
 ## Pre-training Day 1
 
 No relevant coding notes.

@@ -21,7 +21,7 @@ install_github("michaelhallquist/MplusAutomation")
 
 ### Load packages
 
-```{r, eval = FALSE}
+```{r}
 library(MplusAutomation)
 library(tidyverse) #collection of R packages designed for data science
 library(here) #helps with filepaths
@@ -34,12 +34,95 @@ here::i_am("reims-analysis.Rmd")
 
 ### Model
 
+```{r, echo=F, eval=T, fig.align='center'}
+
+grViz(" digraph model {
+
+# The `graph` statement - No editing needed
+
+    graph [layout = dot, overlap = true]
+ 
+# Two `node` statements
+ 
+# One for measured variables (box) 
+
+    node [shape=box]
+    mathperson1 mathperson2 mathperson3 mathperson4;
+ 
+# One for latent variables (circle) 
+ 
+    node [shape=circle]
+    lca [label=<Mathematics Identity <br/>M<sub>k</sub>>];
+    
+# `edge` statements
+ 
+    edge [minlen = 2]
+    lca -> {mathperson1 mathperson2 mathperson3 mathperson4}
+ 
+ }") 
+```
+
 ### Data
 
-```{r}
+```{r, echo=T, eval=T, warning=F}
+# set data
 reims <- read_csv(here("data", "reims_clean.csv"))
-reims
 ```
+
+
+```{r, echo=T, eval=T, warning=F}
+# inspect data
+reims
+summary(reims)
+```
+
+
+```{r, echo=T, eval=T, warning=F}
+# view distribution of indicator variables
+table(reims$groupflag)
+hist(reims$age)
+table(reims$sex)
+table(reims$race)
+
+# subset data
+reims1 <- reims %>% 
+  select(mathperson1, mathperson2, mathperson3, mathperson4)
+head(reims1, n=10)
+```
+
+
+
+```{r, eval = TRUE}
+
+input <- mplusObject(
+  TITLE = "REIMS Initial Model Run",
+  VARIABLE = "categorical = mathperson1 mathperson2 mathperson3 mathperson4;
+  usevar = mathperson1 mathperson2 mathperson3 mathperson4;
+  classes = c(3);",
+  
+  ANALYSIS =
+    "estimator = mlr;
+    type = mixture;",
+  
+  OUTPUT = "tech11 tech14;",
+  
+  PLOT = "type = plot3;
+    series = mathperson1-mathperson4(*);",
+  
+  usevariables = colnames(reims1),
+  rdata = reims1)
+
+output <- mplusModeler(input,
+                       dataout = here("mplus", "reims1.dat"),
+                       modelout = here("mplus", "reims1.inp"),
+                       check = T, run = T, hashfilename = F)
+
+```
+
+
+
+
+
 This file is based in-part on resources provided at the Institute of Mixture Modeling for Equity-Oriented Researchers, Scholars, and Educators (2024).
 IMMERSE In-Person Training Workshop (IES No. 305B220021).
 Institute of Education Sciences.
