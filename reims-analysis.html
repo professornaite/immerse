@@ -13,7 +13,7 @@
 
 <meta name="date" content="2024-06-03" />
 
-<title>REIMS analysis</title>
+<title>REIMS sample analysis</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -368,22 +368,22 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">REIMS analysis</h1>
+<h1 class="title toc-ignore">REIMS sample analysis</h1>
 <h4 class="author">Nathan Alexander</h4>
 <h4 class="date">2024-06-03</h4>
 
 </div>
 
 
-<div id="set-up-mplusautomation" class="section level2">
-<h2>Set up <code>MPlusAutomation</code></h2>
+<div id="set-up-mplusautomation" class="section level3">
+<h3>Set up <code>MPlusAutomation</code></h3>
 <pre class="r"><code>install.packages(&quot;devtools&quot;)
 library(devtools)
 
 install_github(&quot;michaelhallquist/MplusAutomation&quot;)</code></pre>
 </div>
-<div id="load-packages" class="section level2">
-<h2>Load packages</h2>
+<div id="load-packages" class="section level3">
+<h3>Load packages</h3>
 <pre class="r"><code>library(MplusAutomation)</code></pre>
 <pre><code>## Version:  1.2
 ## We work hard to write this free software. Please help us get credit by citing: 
@@ -415,7 +415,40 @@ install_github(&quot;michaelhallquist/MplusAutomation&quot;)</code></pre>
 <pre class="r"><code>library(gt) # creates tables
 library(DiagrammeR) # create path diagrams
 here::i_am(&quot;reims-analysis.Rmd&quot;)</code></pre>
-<pre><code>## here() starts at /Users/nathanalexander/Dropbox/Projects/immerse/reports/reims</code></pre>
+<pre><code>## here() starts at /Users/nathanalexander/Dropbox/Projects/immerse</code></pre>
+</div>
+<div id="data" class="section level3">
+<h3>Data</h3>
+<pre class="r"><code>reims &lt;- read_csv(here(&quot;data&quot;, &quot;reims_clean.csv&quot;))</code></pre>
+<pre><code>## New names:
+## Rows: 103 Columns: 57
+## ── Column specification
+## ──────────────────────────────────────────────────────── Delimiter: &quot;,&quot; dbl
+## (57): groupflag, age, sex, race, mathperson1, mathperson2, mathperson3, ...
+## ℹ Use `spec()` to retrieve the full column specification for this data. ℹ
+## Specify the column types or set `show_col_types = FALSE` to quiet this message.
+## • `belongrace...19` -&gt; `belongrace`</code></pre>
+<pre class="r"><code>reims</code></pre>
+<pre><code>## # A tibble: 103 × 57
+##    groupflag   age   sex  race mathperson1 mathperson2 mathperson3 mathperson4
+##        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
+##  1         1    18     2     6           0           0           0           0
+##  2         1    22     2     1           0           0           0           0
+##  3         1    20     1     7           1           1           1           1
+##  4         1    20     1     3           1           1           1           1
+##  5         1    18     1     4           0           0           0           1
+##  6         1    18     2     6           0           0           0           0
+##  7         1    19     1     6           0           0           0           0
+##  8         1    23     2     4           0           0           0           0
+##  9         1    37     2     3           0           0           0           0
+## 10         1    27     2     6           0           0           0           0
+## # ℹ 93 more rows
+## # ℹ 49 more variables: dislikemathclass &lt;dbl&gt;, pursuestem &lt;dbl&gt;,
+## #   boysbetter &lt;dbl&gt;, learnrace &lt;dbl&gt;, racegroups &lt;dbl&gt;, knowrace &lt;dbl&gt;,
+## #   connectrace1 &lt;dbl&gt;, affectrace &lt;dbl&gt;, proudrace &lt;dbl&gt;, mixrace &lt;dbl&gt;,
+## #   unclearrace &lt;dbl&gt;, connectrace2 &lt;dbl&gt;, dontknowrace &lt;dbl&gt;,
+## #   belongrace &lt;dbl&gt;, understandrace &lt;dbl&gt;, talkrace &lt;dbl&gt;, priderace &lt;dbl&gt;,
+## #   avoidrace &lt;dbl&gt;, practicerace &lt;dbl&gt;, playotherrace &lt;dbl&gt;, …</code></pre>
 <p>This file is based in-part on resources provided at the Institute of
 Mixture Modeling for Equity-Oriented Researchers, Scholars, and
 Educators (2024). IMMERSE In-Person Training Workshop (IES

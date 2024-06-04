@@ -21,7 +21,7 @@ install_github("michaelhallquist/MplusAutomation")
 
 ### Load packages
 
-```{r}
+```{r, eval = FALSE}
 library(MplusAutomation)
 library(tidyverse) #collection of R packages designed for data science
 library(here) #helps with filepaths
@@ -31,6 +31,8 @@ library(DiagrammeR) # create path diagrams
 here::i_am("reims-analysis.Rmd")
 ```
 
+
+### Model
 
 ### Data
 
