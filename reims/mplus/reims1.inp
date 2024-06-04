@@ -1,14 +1,14 @@
 TITLE:
-REIMS Mathematics Identity Model
+REIMS Mathematics Identity Model 2
 DATA:
 FILE = "/Users/nathanalexander/Dropbox/Projects/immerse/reims/mplus/
 reims1.dat"; 
 VARIABLE:
-NAMES = m1 m2 m3 m4; 
+NAMES = m1 m2 m3 m4 dislike pursue boys; 
  MISSING=.;
- categorical = m1 m2 m3 m4;
-  usevar = m1-m4;
-  classes = c(3);
+ categorical = m1 m2 m3 m4 dislike pursue boys;
+  usevar = m1-boys;
+  classes = c(4);
 ANALYSIS:
 estimator = mlr;
     type = mixture;
@@ -16,4 +16,4 @@ OUTPUT:
 tech11 tech14;
 PLOT:
 type = plot3;
-    series = m1-m4(*);
+    series = m1-boys(*);

@@ -31,8 +31,51 @@ library(DiagrammeR) # create path diagrams
 here::i_am("reims-analysis.Rmd")
 ```
 
+### Data
 
-### Model
+```{r, echo=T, eval=T, warning=F}
+# set data
+reims <- read_csv(here("data", "reims_clean.csv"))
+```
+
+
+```{r, echo=T, eval=T, warning=F}
+# inspect data
+reims
+summary(reims)
+```
+
+#### Make updates/edits to data
+
+We observe some of the other tags on our data. We also look at the distribution of some values. Take note that we changed the variable names (thanks Dina!) to less than eight characters so that our model could run.
+
+```{r, echo=T, eval=T, warning=F}
+# view distribution of indicator variables
+table(reims$groupflag)
+hist(reims$age)
+table(reims$sex)
+table(reims$race)
+
+# subset data
+reims1 <- reims %>% 
+  select(mathperson1, mathperson2, mathperson3, mathperson4, dislikemathclass, pursuestem, boysbetter) %>% 
+  rename(m1 = mathperson1,
+         m2 = mathperson2,
+         m3 = mathperson3,
+         m4 = mathperson4,
+         dislike = dislikemathclass,
+         pursue = pursuestem,
+         boys = boysbetter)
+
+head(reims1, n=10)
+
+## add ids and covariates; tell mplus that what we are
+
+# use the reorder function to get hte variables that you want to model in the output.
+
+```
+
+## Model 1
 
 ```{r, echo=F, eval=T, fig.align='center'}
 
@@ -62,49 +105,12 @@ grViz(" digraph model {
  }") 
 ```
 
-### Data
-
-```{r, echo=T, eval=T, warning=F}
-# set data
-reims <- read_csv(here("data", "reims_clean.csv"))
-```
-
-
-```{r, echo=T, eval=T, warning=F}
-# inspect data
-reims
-summary(reims)
-```
-
-
-```{r, echo=T, eval=T, warning=F}
-# view distribution of indicator variables
-table(reims$groupflag)
-hist(reims$age)
-table(reims$sex)
-table(reims$race)
-
-# subset data
-reims1 <- reims %>% 
-  select(mathperson1, mathperson2, mathperson3, mathperson4) %>% 
-  rename(m1 = mathperson1,
-         m2 = mathperson2,
-         m3 = mathperson3,
-         m4 = mathperson4)
-
-head(reims1, n=10)
-
-## add ids and covariates; tell mplus that what we are
-
-# use the reorder function to get hte variables that you want to model in the output.
-
-```
-
+### Model 1 MplusAutomation code
 
 ```{r, eval = T}
 
 input <- mplusObject(
-  TITLE = "REIMS Mathematics Identity Model",
+  TITLE = "REIMS Mathematics Identity Model 1",
   VARIABLE = "categorical = m1 m2 m3 m4;
   usevar = m1-m4;
   classes = c(3);",
@@ -133,14 +139,89 @@ Take a look at the item probability plot:
 ```{r}
 source(here("plot_lca.txt")) # custom function created by Dina to plot our lsa output
 
-model <- readModels(here("mplus", "reims1.out")) # read in output
+model1 <- readModels(here("mplus", "reims1.out")) # read in output
 
-plot_lca(model_name = model) # there is an error with the non atomic measure columns
+plot_lca(model_name = model1) # there is an error with the non atomic measure columns
 ``` 
 
 Show probability plot of data and observe the different classes.
 
 ---
+
+## Model 2
+
+Let's run a four class model and add three variables.
+
+```{r, echo=F, eval=T, fig.align='center'}
+
+grViz(" digraph model {
+
+# The `graph` statement - No editing needed
+
+    graph [layout = dot, overlap = true]
+ 
+# Two `node` statements
+ 
+# One for measured variables (box) 
+
+    node [shape=box]
+    mathperson1 mathperson2 mathperson3 mathperson4 dislikemathclass pursuestem boysbetter;
+ 
+# One for latent variables (circle) 
+ 
+    node [shape=circle]
+    lca [label=<Mathematics Identity <br/>C<sub>k</sub>>];
+    
+# `edge` statements
+ 
+    edge [minlen = 2]
+    lca -> {mathperson1 mathperson2 mathperson3 mathperson4 dislikemathclass pursuestem boysbetter}
+ 
+ }") 
+```
+
+### Model 2 MplusAutomation code
+
+```{r, eval = T}
+
+input <- mplusObject(
+  TITLE = "REIMS Mathematics Identity Model 2",
+  VARIABLE = "categorical = m1 m2 m3 m4 dislike pursue boys;
+  usevar = m1-boys;
+  classes = c(4);",
+  
+  ANALYSIS =
+    "estimator = mlr;
+    type = mixture;",
+  
+  OUTPUT = "tech11 tech14;",
+  
+  PLOT = "type = plot3;
+    series = m1-boys(*);",
+  
+  usevariables = colnames(reims1),
+  rdata = reims1)
+
+output <- mplusModeler(input,
+                       dataout = here("mplus", "reims1.dat"),
+                       modelout = here("mplus", "reims1.inp"),
+                       check = T, run = T, hashfilename = F)
+
+```
+
+Take a look at the item probability plot:
+
+```{r}
+source(here("plot_lca.txt")) # custom function created by Dina to plot our lsa output
+
+model2 <- readModels(here("mplus", "reims1.out")) # read in output
+
+plot_lca(model_name = model2) # there is an error with the non atomic measure columns
+``` 
+
+Show probability plot of data and observe the different classes.
+
+
 
 This file is based on resources provided at the Institute of Mixture Modeling for Equity-Oriented Researchers, Scholars, and Educators (2024). IMMERSE In-Person Training Workshop (IES No. 305B220021).
 Institute of Education Sciences.
