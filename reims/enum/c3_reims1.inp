@@ -1,0 +1,16 @@
+TITLE:
+3-Class
+DATA:
+FILE = "/Users/nathanalexander/Dropbox/Projects/immerse/reims/enum/
+reims1.dat"; 
+VARIABLE:
+NAMES = m1 m2 m3 m4 dislike pursue boys; 
+ MISSING=.;
+ categorical m1-boys;
+usevar = m1-boys;
+classes = c(3);
+ANALYSIS:
+estimator = mlr;
+    type = mixture;
+OUTPUT:
+tech11 tech14 svalues;

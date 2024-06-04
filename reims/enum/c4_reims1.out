@@ -5,24 +5,21 @@ MUTHEN & MUTHEN
 INPUT INSTRUCTIONS
 
   TITLE:
-  REIMS Mathematics Identity Model 2
+  4-Class
   DATA:
-  FILE = "/Users/nathanalexander/Dropbox/Projects/immerse/reims/mplus/
+  FILE = "/Users/nathanalexander/Dropbox/Projects/immerse/reims/enum/
   reims1.dat";
   VARIABLE:
   NAMES = m1 m2 m3 m4 dislike pursue boys;
    MISSING=.;
-   categorical = m1 m2 m3 m4 dislike pursue boys;
-    usevar = m1-boys;
-    classes = c(4);
+   categorical m1-boys;
+  usevar = m1-boys;
+  classes = c(4);
   ANALYSIS:
   estimator = mlr;
       type = mixture;
   OUTPUT:
-  tech11 tech14;
-  PLOT:
-  type = plot3;
-      series = m1-boys(*);
+  tech11 tech14 svalues;
 
 
 
@@ -31,7 +28,7 @@ INPUT READING TERMINATED NORMALLY
 
 
 
-REIMS Mathematics Identity Model 2
+4-Class
 
 SUMMARY OF ANALYSIS
 
@@ -92,7 +89,7 @@ Random Starts Specifications
 Link                                                         LOGIT
 
 Input data file(s)
-  /Users/nathanalexander/Dropbox/Projects/immerse/reims/mplus/reims1.dat
+  /Users/nathanalexander/Dropbox/Projects/immerse/reims/enum/reims1.dat
 Input data format  FREE
 
 
@@ -543,6 +540,56 @@ Latent Class 3 Compared to Latent Class 4
     Category > 1   *********      0.000  *********  *********
 
 
+MODEL COMMAND WITH FINAL ESTIMATES USED AS STARTING VALUES
+
+     %OVERALL%
+
+     [ c#1*0.32170 ];
+     [ c#2*-1.56865 ];
+     [ c#3*-2.35332 ];
+
+     %C#1%
+
+     [ m1$1*-3.21810 ];
+     [ m2$1*-15 ];
+     [ m3$1*-2.19977 ];
+     [ m4$1*-2.46993 ];
+     [ dislike$1*2.49826 ];
+     [ pursue$1*-0.94716 ];
+     [ boys$1*2.07343 ];
+
+     %C#2%
+
+     [ m1$1*-15 ];
+     [ m2$1*1.94042 ];
+     [ m3$1*0.95691 ];
+     [ m4$1*1.85382 ];
+     [ dislike$1*15 ];
+     [ pursue$1*-0.85201 ];
+     [ boys$1*1.85295 ];
+
+     %C#3%
+
+     [ m1$1*15 ];
+     [ m2$1*15 ];
+     [ m3$1*1.45271 ];
+     [ m4$1*15 ];
+     [ dislike$1*-15 ];
+     [ pursue$1*-15 ];
+     [ boys$1*0.97428 ];
+
+     %C#4%
+
+     [ m1$1*2.85996 ];
+     [ m2$1*2.14189 ];
+     [ m3$1*2.70255 ];
+     [ m4$1*2.43694 ];
+     [ dislike$1*0.09062 ];
+     [ pursue$1*1.10060 ];
+     [ boys$1*15 ];
+
+
+
 TECHNICAL 11 OUTPUT
 
      Random Starts Specifications for the k-1 Class Analysis Model
@@ -591,16 +638,8 @@ TECHNICAL 14 OUTPUT
           Successful Bootstrap Draws                            2
 
 
-PLOT INFORMATION
-
-The following plots are available:
-
-  Histograms (sample values)
-  Scatterplots (sample values)
-  Sample proportions and estimated probabilities
-
-     Beginning Time:  19:56:55
-        Ending Time:  19:56:55
+     Beginning Time:  19:56:17
+        Ending Time:  19:56:17
        Elapsed Time:  00:00:00
 
 

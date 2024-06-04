@@ -1,0 +1,308 @@
+Mplus VERSION 8.11 (Mac)
+MUTHEN & MUTHEN
+06/04/2024   7:56 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE:
+  1-Class
+  DATA:
+  FILE = "/Users/nathanalexander/Dropbox/Projects/immerse/reims/enum/
+  reims1.dat";
+  VARIABLE:
+  NAMES = m1 m2 m3 m4 dislike pursue boys;
+   MISSING=.;
+   categorical m1-boys;
+  usevar = m1-boys;
+  classes = c(1);
+  ANALYSIS:
+  estimator = mlr;
+      type = mixture;
+  OUTPUT:
+  tech11 tech14 svalues;
+
+
+
+*** WARNING in OUTPUT command
+  TECH11 option is not available for TYPE=MIXTURE with only one class.
+  Request for TECH11 is ignored.
+*** WARNING in OUTPUT command
+  TECH14 option is not available for TYPE=MIXTURE with only one class.
+  Request for TECH14 is ignored.
+   2 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+
+1-Class
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                         103
+
+Number of dependent variables                                    7
+Number of independent variables                                  0
+Number of continuous latent variables                            0
+Number of categorical latent variables                           1
+
+Observed dependent variables
+
+  Binary and ordered categorical (ordinal)
+   M1          M2          M3          M4          DISLIKE     PURSUE
+   BOYS
+
+Categorical latent variables
+   C
+
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Optimization Specifications for the Quasi-Newton Algorithm for
+Continuous Outcomes
+  Maximum number of iterations                                 100
+  Convergence criterion                                  0.100D-05
+Optimization Specifications for the EM Algorithm
+  Maximum number of iterations                                 500
+  Convergence criteria
+    Loglikelihood change                                 0.100D-06
+    Relative loglikelihood change                        0.100D-06
+    Derivative                                           0.100D-05
+Optimization Specifications for the M step of the EM Algorithm for
+Categorical Latent variables
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-05
+  Basis for M step termination                           ITERATION
+Optimization Specifications for the M step of the EM Algorithm for
+Censored, Binary or Ordered Categorical (Ordinal), Unordered
+Categorical (Nominal) and Count Outcomes
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-05
+  Basis for M step termination                           ITERATION
+  Maximum value for logit thresholds                            15
+  Minimum value for logit thresholds                           -15
+  Minimum expected cell size for chi-square              0.100D-01
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+Link                                                         LOGIT
+
+Input data file(s)
+  /Users/nathanalexander/Dropbox/Projects/immerse/reims/enum/reims1.dat
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns             1
+     Number of y missing data patterns           0
+     Number of u missing data patterns           1
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+UNIVARIATE PROPORTIONS AND COUNTS FOR CATEGORICAL VARIABLES
+
+    M1
+      Category 1    0.408           42.000
+      Category 2    0.592           61.000
+    M2
+      Category 1    0.437           45.000
+      Category 2    0.563           58.000
+    M3
+      Category 1    0.485           50.000
+      Category 2    0.515           53.000
+    M4
+      Category 1    0.485           50.000
+      Category 2    0.515           53.000
+    DISLIKE
+      Category 1    0.748           77.000
+      Category 2    0.252           26.000
+    PURSUE
+      Category 1    0.447           46.000
+      Category 2    0.553           57.000
+    BOYS
+      Category 1    0.922           95.000
+      Category 2    0.078            8.000
+
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                        7
+
+Loglikelihood
+
+          H0 Value                        -440.027
+          H0 Scaling Correction Factor      1.0000
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                     894.053
+          Bayesian (BIC)                   912.496
+          Sample-Size Adjusted BIC         890.385
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit for the Binary and Ordered Categorical
+(Ordinal) Outcomes
+
+          Pearson Chi-Square
+
+          Value                            626.074
+          Degrees of Freedom                   120
+          P-Value                           0.0000
+
+          Likelihood Ratio Chi-Square
+
+          Value                            287.038
+          Degrees of Freedom                   120
+          P-Value                           0.0000
+
+
+
+FINAL CLASS COUNTS AND PROPORTIONS FOR THE LATENT CLASSES
+BASED ON THE ESTIMATED MODEL
+
+    Latent
+   Classes
+
+       1        103.00000          1.00000
+
+
+FINAL CLASS COUNTS AND PROPORTIONS FOR THE LATENT CLASSES
+BASED ON ESTIMATED POSTERIOR PROBABILITIES
+
+    Latent
+   Classes
+
+       1        103.00000          1.00000
+
+
+FINAL CLASS COUNTS AND PROPORTIONS FOR THE LATENT CLASSES
+BASED ON THEIR MOST LIKELY LATENT CLASS MEMBERSHIP
+
+Class Counts and Proportions
+
+    Latent
+   Classes
+
+       1              103          1.00000
+
+
+Average Latent Class Probabilities for Most Likely Latent Class Membership (Row)
+by Latent Class (Column)
+
+           1
+
+    1   1.000
+
+
+Classification Probabilities for the Most Likely Latent Class Membership (Column)
+by Latent Class (Row)
+
+           1
+
+    1   1.000
+
+
+Logits for the Classification Probabilities for the Most Likely Latent Class Membership (Column)
+by Latent Class (Row)
+
+              1
+
+    1      0.000
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Latent Class 1
+
+ Thresholds
+    M1$1              -0.373      0.201     -1.861      0.063
+    M2$1              -0.254      0.199     -1.277      0.201
+    M3$1              -0.058      0.197     -0.296      0.768
+    M4$1              -0.058      0.197     -0.296      0.768
+    DISLIKE$1          1.086      0.227      4.787      0.000
+    PURSUE$1          -0.214      0.198     -1.082      0.279
+    BOYS$1             2.474      0.368      6.721      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.605E-01
+       (ratio of smallest to largest eigenvalue)
+
+
+RESULTS IN PROBABILITY SCALE
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Latent Class 1
+
+ M1
+    Category 1         0.408      0.048      8.421      0.000
+    Category 2         0.592      0.048     12.231      0.000
+ M2
+    Category 1         0.437      0.049      8.939      0.000
+    Category 2         0.563      0.049     11.522      0.000
+ M3
+    Category 1         0.485      0.049      9.857      0.000
+    Category 2         0.515      0.049     10.449      0.000
+ M4
+    Category 1         0.485      0.049      9.857      0.000
+    Category 2         0.515      0.049     10.449      0.000
+ DISLIKE
+    Category 1         0.748      0.043     17.465      0.000
+    Category 2         0.252      0.043      5.897      0.000
+ PURSUE
+    Category 1         0.447      0.049      9.117      0.000
+    Category 2         0.553      0.049     11.297      0.000
+ BOYS
+    Category 1         0.922      0.026     34.973      0.000
+    Category 2         0.078      0.026      2.945      0.003
+
+
+MODEL COMMAND WITH FINAL ESTIMATES USED AS STARTING VALUES
+
+     %OVERALL%
+
+     %C#1%
+
+     [ m1$1*-0.37320 ];
+     [ m2$1*-0.25378 ];
+     [ m3$1*-0.05827 ];
+     [ m4$1*-0.05827 ];
+     [ dislike$1*1.08571 ];
+     [ pursue$1*-0.21441 ];
+     [ boys$1*2.47444 ];
+
+
+
+     Beginning Time:  19:56:15
+        Ending Time:  19:56:15
+       Elapsed Time:  00:00:00
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2024 Muthen & Muthen

@@ -11,6 +11,8 @@ editor_options:
     wrap: sentence
 ---
 
+# Set up
+
 ### Set up `MPlusAutomation`
 
 ```{r, eval=F}
@@ -74,6 +76,8 @@ head(reims1, n=10)
 # use the reorder function to get hte variables that you want to model in the output.
 
 ```
+
+# Models
 
 ## Model 1
 
@@ -221,6 +225,76 @@ plot_lca(model_name = model2) # there is an error with the non atomic measure co
 
 Show probability plot of data and observe the different classes.
 
+---
+
+# Enumeration
+
+We use the mplusObject function in the MPlusAutomation package and saves all models run.
+
+```{r}
+# add new libraries
+library(cowplot)
+library(glue)
+```
+
+Proporion of indicators using R:
+
+```{r}
+
+# set up data to find proportions of binary indicators
+df <- reims1 %>% 
+  pivot_longer(c(m1, m2, m3, m4, dislike, pursue, boys),
+  names_to = "Variable")
+
+# create table of variables and counts
+t1 <- table(df$Variable, df$value)
+
+# find proportions and round to 3 decimal places
+prop <- prop.table(t1, margin =1) %>% 
+  round(3)
+
+# combine everything to one table
+dframe <- data.frame(Variables=rownames(t1), Proportion=prop[,2], Count=t1[,2])
+
+# remove row names
+row.names(dframe) <- NULL
+
+# Make it a gt() table
+prop_table <- dframe %>% 
+  gt()
+prop_table
+
+# save as a word doc
+gtsave(prop_table, here("figures", "prop_table.docx"))
+```
+
+Use an enumeration function
+
+```{r, eval = F}
+lca_4 <- lapply(1:4, function(k) {
+  lca_enum <- mplusObject(
+    
+    TITLE = glue("{k}-Class"),
+    
+    VARIABLE = glue(
+      "categorical m1-boys;
+      usevar = m1-boys;
+      classes = c({k});"),
+    
+    ANALYSIS =
+      "estimator = mlr;
+    type = mixture;",
+    
+    OUTPUT = "tech11 tech14 svalues;",
+    
+    usevariables = colnames(reims1),
+    rdata = reims1)
+  
+  lca_enum_fit <- mplusModeler(lca_enum,
+                               dataout = glue(here("reims","enum", "reims1.dat")),
+                               modelout = glue(here("reims", "enum", "c{k}_reims1.inp")),
+                               check = T, run = T, hashfilename = F)})
+```
 
 
 This file is based on resources provided at the Institute of Mixture Modeling for Equity-Oriented Researchers, Scholars, and Educators (2024). IMMERSE In-Person Training Workshop (IES No. 305B220021).
