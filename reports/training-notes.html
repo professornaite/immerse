@@ -144,14 +144,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="basic-of-the-em-algorithm">Basic of the EM Algorithm</h3>
 <ul>
 <li><p>Initialization: Start with an initial set of estimates for the parameters.</p></li>
-<li><p>E-Step (Extraction step): Given the current parameter estimates, calculate the expected values of the latent variables or unobsered data.</p></li>
+<li><p>E-Step (Extraction step): Given the current parameter estimates, calculate the expected values of the latent variables or unobserved data.</p></li>
 <li><p>M-step (Maximization step): Maximize the expected log-likelihood function by updating the parameter estimates based on the exepcted values obtained in the E-step.</p></li>
-<li><p>Iteration: Repeate steps 2 and 3 until convergence, which is typically determined by a predefined convergence criterion.</p></li>
+<li><p>Iteration: Repeat steps 2 and 3 until convergence, which is typically determined by a predefined convergence criterion.</p></li>
 </ul>
 <p><em>Goal is to find the parameter values that maximize the likelihood; the estimation “crawls along” with estimation to find “the peak.”</em></p>
 <ul>
-<li>Stopping criteria is neededd or it will iterate forever and you wil never get an output file.</li>
+<li>Stopping criteria is needed or it will iterate forever and you will never get an output file.</li>
 </ul>
+</section>
+<section id="details-of-the-modeling-process" class="level3">
+<h3 class="anchored" data-anchor-id="details-of-the-modeling-process">Details of the modeling process</h3>
+<section id="class-enumeration" class="level4">
+<h4 class="anchored" data-anchor-id="class-enumeration">Class enumeration</h4>
+<ul>
+<li>Random starts note, if you do 50 random starts, you are estimating 50 mixture models. This is not necessarily what you want to do. See notes slides on Random Starts (EM Step 1).</li>
+</ul>
+<p>– Look-up perturbations in relation to the modeling process.</p>
+<ul>
+<li>In the output command, when you ask for <code>S</code> values, you have to ask for it, it is not automatically produced. An entire model statement is produced that cannot be directly placed into an output file; it is a model statement with start values included. <em>Place an asterisk with a number after it.</em> The @ symbol holds the start value.</li>
+</ul>
+<p>– Increasing model complexity is when you see things break down. Empirical identification is the ultimate goal; we should not give it up if it does not converge the first time, we’ll have to help it move along.</p>
+</section>
+<section id="deciding-on-the-number-of-latent-classes" class="level4">
+<h4 class="anchored" data-anchor-id="deciding-on-the-number-of-latent-classes">Deciding on the number of latent classes</h4>
+<p>How do we decide on the number of classes?</p>
+<pre><code>- The number of classes is generally not know.
+
+- We rarely have a specific typology of how many classes.</code></pre>
+</section>
 </section>
 </section>
 <section id="pre-training-day-1" class="level2">
@@ -165,7 +186,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="load-palmer-penguins-data" class="level4">
 <h4 class="anchored" data-anchor-id="load-palmer-penguins-data">Load palmer penguins data</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(df) <span class="co"># get a glimpse of the data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(df) <span class="co"># get a glimpse of the data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 344
 Columns: 8
@@ -178,17 +199,17 @@ $ body_mass_g       &lt;int&gt; 3750, 3800, 3250, NA, 3450, 3650, 3625, 4675, 34
 $ sex               &lt;fct&gt; male, female, female, NA, female, male, female, male…
 $ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007…</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(df) <span class="co"># gather the dimensions of the data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(df) <span class="co"># gather the dimensions of the data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 344   8</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df) <span class="co"># gather names of variables</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df) <span class="co"># gather names of variables</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "species"           "island"            "bill_length_mm"   
 [4] "bill_depth_mm"     "flipper_length_mm" "body_mass_g"      
 [7] "sex"               "year"             </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df) <span class="co"># gather a summary of the data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df) <span class="co"># gather a summary of the data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      species          island    bill_length_mm  bill_depth_mm  
  Adelie   :152   Biscoe   :168   Min.   :32.10   Min.   :13.10  
@@ -218,9 +239,9 @@ $ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 
 <li><p>What type of graph?</p></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> df, <span class="fu">aes</span>(<span class="at">x =</span> flipper_length_mm, <span class="at">y =</span> body_mass_g)) <span class="sc">+</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="ot">-&gt;</span> plot1</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>plot1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> df, <span class="fu">aes</span>(<span class="at">x =</span> flipper_length_mm, <span class="at">y =</span> body_mass_g)) <span class="sc">+</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="ot">-&gt;</span> plot1</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>plot1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Removed 2 rows containing missing values or values outside the scale range
 (`geom_point()`).</code></pre>

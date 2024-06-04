@@ -2,7 +2,8 @@
 title: "REIMS sample analysis"
 author: "Nathan Alexander"
 date: "2024-06-03"
-output: 
+output:
+  pdf_document: default
   html_document:
     theme: flatly
 editor_options:
@@ -85,10 +86,17 @@ table(reims$race)
 
 # subset data
 reims1 <- reims %>% 
-  select(mathperson1, mathperson2, mathperson3, mathperson4)
+  select(mathperson1, mathperson2, mathperson3, mathperson4) %>% 
+  rename(m1 = mathperson1,
+         m2 = mathperson2,
+         m3 = mathperson3,
+         m4 = mathperson4)
+
 head(reims1, n=10)
 
 ## add ids and covariates; tell mplus that what we are
+
+# use the reorder function to get hte variables that you want to model in the output.
 
 ```
 
@@ -97,8 +105,8 @@ head(reims1, n=10)
 
 input <- mplusObject(
   TITLE = "REIMS Mathematics Identity Model",
-  VARIABLE = "categorical = mathperson1 mathperson2 mathperson3 mathperson4;
-  usevar = mathperson1 mathperson2 mathperson3 mathperson4;
+  VARIABLE = "categorical = m1 m2 m3 m4;
+  usevar = m1-m4;
   classes = c(3);",
   
   ANALYSIS =
@@ -108,7 +116,7 @@ input <- mplusObject(
   OUTPUT = "tech11 tech14;",
   
   PLOT = "type = plot3;
-    series = mathperson1-mathperson4(*);",
+    series = m1-m4(*);",
   
   usevariables = colnames(reims1),
   rdata = reims1)
@@ -129,7 +137,6 @@ model <- readModels(here("mplus", "reims1.out")) # read in output
 
 plot_lca(model_name = model) # there is an error with the non atomic measure columns
 ``` 
-
 
 Show probability plot of data and then observe the different classes.
 

@@ -1,6 +1,6 @@
 Mplus VERSION 8.11 (Mac)
 MUTHEN & MUTHEN
-06/04/2024   3:07 PM
+06/04/2024   4:59 PM
 
 INPUT INSTRUCTIONS
 
@@ -9,10 +9,10 @@ INPUT INSTRUCTIONS
   DATA:
   FILE = "/Users/nathanalexander/Dropbox/Projects/immerse/mplus/reims1.dat";
   VARIABLE:
-  NAMES = mathperson1 mathperson2 mathperson3 mathperson4;
+  NAMES = m1 m2 m3 m4;
    MISSING=.;
-   categorical = mathperson1 mathperson2 mathperson3 mathperson4;
-    usevar = mathperson1 mathperson2 mathperson3 mathperson4;
+   categorical = m1 m2 m3 m4;
+    usevar = m1-m4;
     classes = c(3);
   ANALYSIS:
   estimator = mlr;
@@ -21,18 +21,11 @@ INPUT INSTRUCTIONS
   tech11 tech14;
   PLOT:
   type = plot3;
-      series = mathperson1-mathperson4(*);
+      series = m1-m4(*);
 
 
 
-*** WARNING in VARIABLE command
-  Note that only the first 8 characters of variable names are used in the output.
-  Shorten variable names to avoid any confusion.
-*** WARNING in PLOT command
-  Note that only the first 8 characters of variable names are used in plots.
-  If variable names are not unique within the first 8 characters, problems
-  may occur.
-   2 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+INPUT READING TERMINATED NORMALLY
 
 
 
@@ -52,7 +45,7 @@ Number of categorical latent variables                           1
 Observed dependent variables
 
   Binary and ordered categorical (ordinal)
-   MATHPERS    MATHPERS    MATHPERS    MATHPERS
+   M1          M2          M3          M4
 
 Categorical latent variables
    C
@@ -115,16 +108,16 @@ Minimum covariance coverage value   0.100
 
 UNIVARIATE PROPORTIONS AND COUNTS FOR CATEGORICAL VARIABLES
 
-    MATHPERS
+    M1
       Category 1    0.408           42.000
       Category 2    0.592           61.000
-    MATHPERS
+    M2
       Category 1    0.437           45.000
       Category 2    0.563           58.000
-    MATHPERS
+    M3
       Category 1    0.485           50.000
       Category 2    0.515           53.000
-    MATHPERS
+    M4
       Category 1    0.485           50.000
       Category 2    0.515           53.000
 
@@ -267,26 +260,26 @@ MODEL RESULTS
 Latent Class 1
 
  Thresholds
-    MATHPERS$1         0.006      0.997      0.006      0.995
-    MATHPERS$1         0.835      1.615      0.517      0.605
-    MATHPERS$1        -2.731     32.199     -0.085      0.932
-    MATHPERS$1        15.000      0.000    999.000    999.000
+    M1$1               0.006      0.997      0.006      0.995
+    M2$1               0.835      1.615      0.517      0.605
+    M3$1              -2.731     32.199     -0.085      0.932
+    M4$1              15.000      0.000    999.000    999.000
 
 Latent Class 2
 
  Thresholds
-    MATHPERS$1        -3.155      0.723     -4.365      0.000
-    MATHPERS$1       -15.000      0.000    999.000    999.000
-    MATHPERS$1        -2.182      0.476     -4.581      0.000
-    MATHPERS$1        -2.592      0.871     -2.975      0.003
+    M1$1              -3.155      0.723     -4.365      0.000
+    M2$1             -15.000      0.000    999.000    999.000
+    M3$1              -2.182      0.476     -4.581      0.000
+    M4$1              -2.592      0.871     -2.975      0.003
 
 Latent Class 3
 
  Thresholds
-    MATHPERS$1         1.590      0.671      2.369      0.018
-    MATHPERS$1         2.441      0.994      2.455      0.014
-    MATHPERS$1        15.000      0.000    999.000    999.000
-    MATHPERS$1         2.294      0.591      3.883      0.000
+    M1$1               1.590      0.671      2.369      0.018
+    M2$1               2.441      0.994      2.455      0.014
+    M3$1              15.000      0.000    999.000    999.000
+    M4$1               2.294      0.591      3.883      0.000
 
 Categorical Latent Variables
 
@@ -308,46 +301,46 @@ RESULTS IN PROBABILITY SCALE
 
 Latent Class 1
 
- MATHPERSON
+ M1
     Category 1         0.502      0.249      2.012      0.044
     Category 2         0.498      0.249      1.999      0.046
- MATHPERSON
+ M2
     Category 1         0.697      0.341      2.046      0.041
     Category 2         0.303      0.341      0.888      0.375
- MATHPERSON
+ M3
     Category 1         0.061      1.849      0.033      0.974
     Category 2         0.939      1.849      0.508      0.612
- MATHPERSON
+ M4
     Category 1         1.000      0.000      0.000      1.000
     Category 2         0.000      0.000      0.000      1.000
 
 Latent Class 2
 
- MATHPERSON
+ M1
     Category 1         0.041      0.028      1.442      0.149
     Category 2         0.959      0.028     33.836      0.000
- MATHPERSON
+ M2
     Category 1         0.000      0.000      0.000      1.000
     Category 2         1.000      0.000      0.000      1.000
- MATHPERSON
+ M3
     Category 1         0.101      0.043      2.336      0.019
     Category 2         0.899      0.043     20.715      0.000
- MATHPERSON
+ M4
     Category 1         0.070      0.056      1.233      0.217
     Category 2         0.930      0.056     16.479      0.000
 
 Latent Class 3
 
- MATHPERSON
+ M1
     Category 1         0.831      0.094      8.797      0.000
     Category 2         0.169      0.094      1.795      0.073
- MATHPERSON
+ M2
     Category 1         0.920      0.073     12.553      0.000
     Category 2         0.080      0.073      1.093      0.274
- MATHPERSON
+ M3
     Category 1         1.000      0.000      0.000      1.000
     Category 2         0.000      0.000      0.000      1.000
- MATHPERSON
+ M4
     Category 1         0.908      0.049     18.479      0.000
     Category 2         0.092      0.049      1.863      0.062
 
@@ -359,35 +352,35 @@ LATENT CLASS INDICATOR ODDS RATIOS FOR THE LATENT CLASSES
 
 Latent Class 1 Compared to Latent Class 2
 
- MATHPERS
+ M1
     Category > 1       0.042      0.052      0.004      0.474
- MATHPERS
+ M2
     Category > 1       0.000      0.000      0.000      0.000
- MATHPERS
+ M3
     Category > 1       1.731     55.867      0.000  *********
- MATHPERS
+ M4
     Category > 1       0.000      0.000      0.000      0.000
 
 Latent Class 1 Compared to Latent Class 3
 
- MATHPERS
+ M1
     Category > 1       4.871      5.768      0.478     49.612
- MATHPERS
+ M2
     Category > 1       4.983     11.080      0.064    389.219
- MATHPERS
+ M3
     Category > 1   *********  *********     19.111  *********
- MATHPERS
+ M4
     Category > 1       0.000      0.000      0.000      0.000
 
 Latent Class 2 Compared to Latent Class 3
 
- MATHPERS
+ M1
     Category > 1     114.997    115.725     15.998    826.597
- MATHPERS
+ M2
     Category > 1   *********      0.000  *********  *********
- MATHPERS
+ M3
     Category > 1   *********      0.000  *********  *********
- MATHPERS
+ M4
     Category > 1     132.517    126.461     20.415    860.178
 
 
@@ -447,8 +440,8 @@ The following plots are available:
   Scatterplots (sample values)
   Sample proportions and estimated probabilities
 
-     Beginning Time:  15:07:06
-        Ending Time:  15:07:06
+     Beginning Time:  16:59:01
+        Ending Time:  16:59:01
        Elapsed Time:  00:00:00
 
 

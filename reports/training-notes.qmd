@@ -42,15 +42,35 @@ The classes that emerge are directly related to the items that you include.
 
   - Initialization: Start with an initial set of estimates for the parameters.
   
-  - E-Step (Extraction step): Given the current parameter estimates, calculate the expected values of the latent variables or unobsered data.
+  - E-Step (Extraction step): Given the current parameter estimates, calculate the expected values of the latent variables or unobserved data.
   
   - M-step (Maximization step): Maximize the expected log-likelihood function by updating the parameter estimates based on the exepcted values obtained in the E-step.
   
-  - Iteration: Repeate steps 2 and 3 until convergence, which is typically determined by a predefined convergence criterion. 
+  - Iteration: Repeat steps 2 and 3 until convergence, which is typically determined by a predefined convergence criterion. 
 
 *Goal is to find the parameter values that maximize the likelihood; the estimation "crawls along" with estimation to find "the peak."*
 
-  - Stopping criteria is neededd or it will iterate forever and you wil never get an output file.
+  - Stopping criteria is needed or it will iterate forever and you will never get an output file.
+
+### Details of the modeling process
+
+#### Class enumeration
+
+  - Random starts note, if you do 50 random starts, you are estimating 50 mixture models. This is not necessarily what you want to do. See notes slides on Random Starts (EM Step 1).
+  
+  -- Look-up perturbations in relation to the modeling process.
+  
+  - In the output command, when you ask for `S` values, you have to ask for it, it is not automatically produced. An entire model statement is produced that cannot be directly placed into an output file; it is a model statement with start values included. *Place an asterisk with a number after it.* The @ symbol holds the start value.
+  
+  -- Increasing model complexity is when you see things break down. Empirical identification is the ultimate goal; we should not give it up if it does not converge the first time, we'll have to help it move along.
+  
+#### Deciding on the number of latent classes
+
+How do we decide on the number of classes?
+  
+    - The number of classes is generally not know.
+    
+    - We rarely have a specific typology of how many classes.
   
 ## Pre-training Day 1
 

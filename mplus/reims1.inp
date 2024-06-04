@@ -3,10 +3,10 @@ REIMS Mathematics Identity Model
 DATA:
 FILE = "/Users/nathanalexander/Dropbox/Projects/immerse/mplus/reims1.dat"; 
 VARIABLE:
-NAMES = mathperson1 mathperson2 mathperson3 mathperson4; 
+NAMES = m1 m2 m3 m4; 
  MISSING=.;
- categorical = mathperson1 mathperson2 mathperson3 mathperson4;
-  usevar = mathperson1 mathperson2 mathperson3 mathperson4;
+ categorical = m1 m2 m3 m4;
+  usevar = m1-m4;
   classes = c(3);
 ANALYSIS:
 estimator = mlr;
@@ -15,4 +15,4 @@ OUTPUT:
 tech11 tech14;
 PLOT:
 type = plot3;
-    series = mathperson1-mathperson4(*);
+    series = m1-m4(*);
