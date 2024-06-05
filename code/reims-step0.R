@@ -20,6 +20,10 @@ reims.dummy
 reims.dummy$dislikemathclass <- ifelse(reims.dummy$dislikemathclass == 1, 1, 0)
 table(reims.dummy$dislikemathclass)
 
+# reverse code boys do better
+reims.dummy$boysbetter <- ifelse(reims.dummy$boysbetter == 1, 1, 0)
+table(reims.dummy$boysbetter)
+
 # label of factors
 # math identity: mathperson1 mathperson2 mathperson3 mathperson4 dislikemathclass pursuestem 
 # racial ethnic identity: learnrace knowrace proudrace unclearrace dontknowrace belongrace understandrace talkrace priderace practicerace strongrace feelrace
@@ -37,6 +41,7 @@ test.df <- reims.dummy %>%
 test.df 
 
 table(test.df$dislikemathclass)
+table(test.df$boysbetter)
 
 # check for missing data
 test.df %>% 
