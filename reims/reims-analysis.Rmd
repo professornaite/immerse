@@ -292,8 +292,8 @@ lca_4 <- lapply(1:4, function(k) {
     rdata = reims1)
   
   lca_enum_fit <- mplusModeler(lca_enum,
-                               dataout = glue(here("reims","enum", "reims1.dat")),
-                               modelout = glue(here("reims", "enum", "c{k}_reims1.inp")),
+                               dataout = glue(here("enum", "reims1.dat")),
+                               modelout = glue(here("enum", "c{k}_reims1.inp")),
                                check = T, run = T, hashfilename = F)})
 ```
 
@@ -329,6 +329,7 @@ allFit <- enum_extract %>%
   dplyr::select(1:5, 9:10, 6:7, 13, 14) %>%
   arrange(Parameters)
 ```
+
 Then we create a table:
 
 ```{r}
@@ -502,7 +503,6 @@ ggplot(
 
 ```
 
-
 save the figure:
 
 ```{r, eval = FALSE}
@@ -600,8 +600,255 @@ colnames(patterns) <- c("Frequency", names)
 
 ```
 
+we then create a table with the response patterns, then top of conditional response pattern for each modal class assignment
+
+```{r,eval=TRUE}
+# Order responses by highest frequency
+order_highest <- patterns %>% 
+  arrange(desc(Frequency)) 
+
+# Loop `patterns` data to list top 5 conditional response patterns for each class
+loop_cond  <- lapply(1:max(patterns$C), function(k) {       
+order_cond <- patterns %>%                    
+  filter(C == k) %>%                    
+  arrange(desc(Frequency)) %>%                
+  head(5)                                     
+  })                                          
+
+# Convert loop into data frame
+table_data <- as.data.frame(bind_rows(loop_cond))
+
+# Combine unconditional and conditional responses patterns
+response_patterns <-  rbind(order_highest[1:5,], table_data) 
+```
+
+we then use `{gt}` to make a nicely formatted table.
+
+```{r}
+resp_table <- response_patterns %>% 
+  gt() %>%
+    tab_header(
+    title = "Observed Response Patterns",
+    subtitle = html("Response patterns, estimated frequencies, estimated posterior class probabilities and modal assignments")) %>% 
+    tab_source_note(
+    source_note = md("Data Source: **Racial Ethnic Identity in Mathematics Survey (REIMS)**")) %>%
+    cols_label(
+      Frequency = html("<i>f</i><sub>r</sub>"),
+    M1 = "Math Person 1",
+    M2 = "Math Person 2",
+    M3 = "Math Person 3",
+    M4 = "Math Person 4",
+    DISLIKE = "Dislike Math",
+    PURSUE = "Pursue Math",
+    BOYS = "Boys Better",
+    CPROB1 = html("P<sub><i>k</i></sub>=1"),
+    CPROB2 = html("P<sub><i>k</i></sub>=2"),
+    CPROB3 = html("P<sub><i>k</i></sub>=3"),
+    CPROB4 = html("P<sub><i>k</i></sub>=4"),    # Change based on number of classes
+    C = md("*k*")) %>% 
+  tab_row_group(
+    label = "Unconditional response patterns",
+    rows = 1:5) %>%
+  tab_row_group(
+    label = md("*k* = 1 Conditional response patterns"),
+    rows = 6:10) %>% #EDIT THESE VALUES BASED ON THE LAST COLUMN
+  tab_row_group(
+    label = md("*k* = 2 Conditional response patterns"),
+    rows = 11:15)  %>% #EDIT THESE VALUES BASED ON THE LAST COLUMN
+  tab_row_group(
+    label = md("*k* = 3 Conditional response patterns"),
+    rows = 16)  %>% #EDIT THESE VALUES BASED ON THE LAST COLUMN
+  tab_row_group(
+    label = md("*k* = 4 Conditional response patterns"),
+    rows = 17:21)  %>% #EDIT THESE VALUES BASED ON THE LAST COLUMN  
+    row_group_order(
+      groups = c("Unconditional response patterns",
+                 md("*k* = 1 Conditional response patterns"),
+                 md("*k* = 2 Conditional response patterns"),
+                 md("*k* = 3 Conditional response patterns"),
+                 md("*k* = 4 Conditional response patterns"))) %>% 
+    tab_footnote(
+    footnote = html(
+      "<i>Note.</i> <i>f</i><sub>r</sub> = response pattern frequency; P<sub><i>k</i></sub> = posterior class probabilities"
+    )
+  ) %>% 
+  cols_align(align = "center") %>% 
+  opt_align_table_header(align = "left") %>% 
+  gt::tab_options(table.font.names = "Times New Roman") 
+
+resp_table
+```
+
+save the table
+
+```{r}
+gtsave(resp_table, here("figures", "resp_table.png"))
+```
+
+
+### Classification Diagnostics
+
+We will use Mplus to calculate k-class confidence intervals, using the 4-class model.
+
+```{r, eval = F}
+
+classification <- mplusObject(
+  
+  TITLE = "LCA - Calculate k-Class 95% CI",
+  
+  VARIABLE =
+    "categorical = m1-boys;
+    usevar = m1-boys;
+    classes = c(4);",
+  
+  ANALYSIS =
+    "estimator = ml;
+    type = mixture;
+    starts = 0;
+    processors = 10;
+    optseed = 945065;
+    bootstrap = 100;",
+  
+  MODEL =
+    "
+  !CHANGE THIS SECTION TO YOUR CHOSEN k-CLASS MODEL
+  
+  %OVERALL%
+  [C#1](c1);
+  [C#2](c2);
+  [C#3](c3);
+
+
+  Model Constraint:
+  New(p1 p2 p3 p4);
+  
+  p1 = exp(c1)/(1+exp(c1)+exp(c2)+exp(c3));
+  p2 = exp(c2)/(1+exp(c1)+exp(c2)+exp(c3));
+  p3 = exp(c3)/(1+exp(c1)+exp(c2)+exp(c3));  
+  p4 = 1/(1+exp(c1)+exp(c2)+exp(c3));",
+  
+  OUTPUT = "cinterval(bcbootstrap)",
+  
+  usevariables = colnames(reims1),
+  rdata = reims1)
+
+classification_fit <- mplusModeler(classification,
+                dataout=here("mplus", "reims-1.dat"),
+                modelout=here("mplus", "class.inp") ,
+                check=TRUE, run = TRUE, hashfilename = FALSE)
+```
+
+*Note from IMMERSE team*: Ensure that the classes did not shift during this step (i.g., Class 1 in the enumeration run is now Class 4). Evaluate output and compare the class counts and proportions for the latent classes. Using the OPTSEED function ensures replication of the best loglikelihood value run.  
+
 ---
 
+Read in the 4-class model:
+
+```{r}
+# Read in the 4-class model and extract information needed
+class_output <- readModels(here("mplus", "class.out"))
+
+# Entropy
+entropy <- c(class_output$summaries$Entropy, rep(NA, class_output$summaries$NLatentClasses-1))
+
+# 95% k-Class and k-class 95% Confidence Intervals
+k_ci <- class_output$parameters$ci.unstandardized %>% 
+  filter(paramHeader == "New.Additional.Parameters") %>% 
+  unite(CI, c(low2.5,up2.5), sep=", ", remove = TRUE) %>% 
+  mutate(CI = paste0("[", CI, "]")) %>% 
+  rename(kclass=est) %>% 
+  dplyr::select(kclass, CI)
+
+# AvePPk = Average Latent Class Probabilities for Most Likely Latent Class Membership (Row) by Latent Class (Column)
+avePPk <- tibble(avePPk = diag(class_output$class_counts$avgProbs.mostLikely))
+
+# mcaPk = modal class assignment proportion 
+mcaPk <- round(class_output$class_counts$mostLikely,3) %>% 
+  mutate(model = paste0("Class ", class)) %>% 
+  add_column(avePPk, k_ci) %>% 
+  rename(mcaPk = proportion) %>% 
+  dplyr::select(model, kclass, CI, mcaPk, avePPk)
+
+# OCCk = odds of correct classification
+OCCk <- mcaPk %>% 
+  mutate(OCCk = round((avePPk/(1-avePPk))/(kclass/(1-kclass)),3))
+
+# Put everything together
+class_df <- data.frame(OCCk, entropy)
+```
+
+now we use `{gt}` to make a nicely formatted table
+
+```{r}
+class_table <- class_df %>% 
+  gt() %>%
+    tab_header(
+    title = "Model Classification Diagnostics for the 4-Class Solution") %>%
+    cols_label(
+      model = md("*k*-Class"),
+      kclass = md("*k*-Class Proportions"),
+      CI = "95% CI",
+      mcaPk = md("*mcaPk*"),
+      avePPk = md("*AvePPk*"),
+      OCCk = md("*OCCk*"),
+      entropy = "Entropy") %>% 
+    sub_missing(7,
+              missing_text = "") %>%
+  cols_align(align = "center") %>% 
+  opt_align_table_header(align = "left") %>% 
+  gt::tab_options(table.font.names = "Times New Roman")
+
+class_table
+```
+
+save the table:
+
+```{r}
+gtsave(class_table, here("figures", "class_table.png"))
+```
+
+---
+
+# Auxillary variables
+
+## Model 3
+
+We will now add auxiliary variables to our model.
+
+```{r, echo=F, eval=T, fig.align='center'}
+
+grViz(" digraph model {
+
+# The `graph` statement - No editing needed
+
+    graph [layout = dot, overlap = true]
+ 
+# Two `node` statements
+ 
+# One for measured variables (box) 
+
+    node [shape=box]
+    mathperson1 mathperson2 mathperson3 mathperson4 dislikemathclass pursuestem boysbetter;
+ 
+# One for latent variables (circle) 
+ 
+    node [shape=circle]
+    lca [label=<Mathematics Identity <br/>C<sub>k</sub>>];
+    
+# `edge` statements
+ 
+    edge [minlen = 2]
+    lca -> {mathperson1 mathperson2 mathperson3 mathperson4 dislikemathclass pursuestem boysbetter}
+    
+    node [shape=box]
+    gender -> lca ;
+    age -> lca;
+    race -> lca;
+ 
+ }") 
+```
+
+---
 This file is based on resources provided by the Institute of Mixture Modeling for Equity-Oriented Researchers, Scholars, and Educators (2024). IMMERSE In-Person Training Workshop (IES No. 305B220021).
 Institute of Education Sciences.
 <https://immerse-ucsb.github.io/pre-training>

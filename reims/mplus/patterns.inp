@@ -1,0 +1,26 @@
+TITLE:
+LCA - Save response patterns
+DATA:
+FILE = "/Users/nathanalexander/Dropbox/Projects/immerse/reims/mplus/
+patterns.dat"; 
+VARIABLE:
+NAMES = m1 m2 m3 m4 dislike pursue boys; 
+ MISSING=.;
+ categorical = m1-boys; 
+   usevar =  m1-boys;
+   classes = c(4);
+ANALYSIS:
+estimator = mlr; 
+    type = mixture;    
+    starts = 0; 
+    processors = 10;
+    optseed = 830529;
+OUTPUT:
+patterns tech10 tech11 tech14
+SAVEDATA:
+File=savedata.dat;
+    Save=cprob;
+    
+    ! Code to save response frequency data 
+    
+    response is resp_patterns.dat;
