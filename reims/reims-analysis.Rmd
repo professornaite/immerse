@@ -502,8 +502,106 @@ ggplot(
 
 ```
 
+
+save the figure:
+
+```{r, eval = FALSE}
+ggsave(here("figures", "compare_kclass_plot.png"), dpi=300, height=5, width=7, units="in")
+```
+
+
+### 4-Class Probability Plot
+
+Use the `plot_lca` function provided in the folder to plot the item probability plot. This function requires one argument:
+- `model_name`: The name of the Mplus `readModels` object (e.g., `output_lsal$c4_lsal.out`) - this was updated for reims.
+
+```{r fig.height=6, fig.width=10}
+source("plot_lca.txt")
+
+plot_lca(model_name = output_reims1$c4_reims1.out)
+```
+
+save the figure:
+
+```{r, eval = FALSE}
+ggsave(here("figures", "probability_plot_4class.png"), dpi="retina", height=5, width=7, units="in")
+```
+
+### 2-Class Probability Plot
+
+```{r fig.height=6, fig.width=10}
+
+source("plot_lca.txt")
+
+plot_lca(model_name = output_reims1$c2_reims1.out)
+
+```
+
+save the figure:
+
+```{r, eval = FALSE}
+ggsave(here("figures", "probability_plot_2class.png"), dpi="retina", height=5, width=7, units="in")
+```
+
+### Observed response patterns
+
+Save response frequencies for the 2-class model with `response is _____.dat` under `SAVEDATA`.
+
+```{r, eval = FALSE}
+
+patterns  <- mplusObject(
+  
+  TITLE = "LCA - Save response patterns", 
+  
+  VARIABLE = 
+  "categorical = m1-boys; 
+   usevar =  m1-boys;
+   classes = c(4);",
+  
+  ANALYSIS = 
+   "estimator = mlr; 
+    type = mixture;    
+    starts = 0; 
+    processors = 10;
+    optseed = 830529;",
+  
+  SAVEDATA = 
+   "File=savedata.dat;
+    Save=cprob;
+    
+    ! Code to save response frequency data 
+    
+    response is resp_patterns.dat;",
+  
+  OUTPUT = "patterns tech10 tech11 tech14",
+  
+  usevariables = colnames(reims1),
+  rdata = reims1)
+
+patterns_fit <- mplusModeler(patterns,
+                dataout=here("mplus", "patterns.dat"),
+                modelout=here("mplus", "patterns.inp") ,
+                check=TRUE, run = TRUE, hashfilename = FALSE)
+```
+
+read in observed response pattern data and relabel the columns:
+
+```{r}
+
+# read in response frequency data that we just created:
+patterns <- read_table(here("mplus", "resp_patterns.dat"),
+                        col_names=FALSE, na = "*") 
+
+# extract the column names
+names <- names(readModels(here("mplus", "patterns.out"))[['savedata']])
+
+# add the names back to the dataset
+colnames(patterns) <- c("Frequency", names)  
+
+```
+
 ---
 
-This file is based on resources provided at the Institute of Mixture Modeling for Equity-Oriented Researchers, Scholars, and Educators (2024). IMMERSE In-Person Training Workshop (IES No. 305B220021).
+This file is based on resources provided by the Institute of Mixture Modeling for Equity-Oriented Researchers, Scholars, and Educators (2024). IMMERSE In-Person Training Workshop (IES No. 305B220021).
 Institute of Education Sciences.
 <https://immerse-ucsb.github.io/pre-training>
