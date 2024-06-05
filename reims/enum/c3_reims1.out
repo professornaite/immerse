@@ -1,6 +1,6 @@
 Mplus VERSION 8.11 (Mac)
 MUTHEN & MUTHEN
-06/04/2024   7:56 PM
+06/05/2024  12:25 PM
 
 INPUT INSTRUCTIONS
 
@@ -17,7 +17,8 @@ INPUT INSTRUCTIONS
   classes = c(3);
   ANALYSIS:
   estimator = mlr;
-      type = mixture;
+        type = mixture;
+        starts = 500 100;
   OUTPUT:
   tech11 tech14 svalues;
 
@@ -80,8 +81,8 @@ Maximum number of iterations for H1                           2000
 Convergence criterion for H1                             0.100D-03
 Optimization algorithm                                         EMA
 Random Starts Specifications
-  Number of initial stage random starts                         20
-  Number of final stage optimizations                            4
+  Number of initial stage random starts                        500
+  Number of final stage optimizations                          100
   Number of initial stage iterations                            10
   Initial stage convergence criterion                    0.100D+01
   Random starts scale                                    0.500D+01
@@ -134,10 +135,87 @@ RANDOM STARTS RESULTS RANKED FROM THE BEST TO THE WORST LOGLIKELIHOOD VALUES
 
 Final stage loglikelihood values at local maxima, seeds, and initial stage start numbers:
 
+            -314.909  804660           260
+            -314.909  124999           96
+            -314.909  626891           32
+            -314.909  699554           427
+            -314.909  762461           425
+            -314.909  971853           402
+            -314.909  644297           340
             -314.909  533738           11
+            -314.909  411615           171
+            -314.909  232226           235
+            -314.909  972430           491
+            -314.909  69413            472
+            -314.909  57226            208
+            -314.909  667250           318
+            -314.909  728038           177
+            -314.909  352277           42
+            -314.909  238906           430
+            -314.909  829540           324
+            -314.909  246575           291
+            -314.909  898745           466
+            -314.909  631413           439
+            -314.909  455617           242
+            -314.909  629320           222
+            -314.909  502532           445
+            -314.909  784664           75
+            -314.909  966014           37
+            -314.909  823392           479
+            -314.909  496710           386
+            -314.909  131856           90
+            -314.909  335485           496
+            -314.909  509733           130
             -314.909  608496           4
+            -314.909  152496           123
+            -314.909  391179           78
+            -314.909  970689           266
+            -314.909  526324           178
+            -314.909  105435           265
+            -314.909  156536           245
+            -314.909  314084           81
+            -314.909  65651            214
+            -314.909  783110           72
+            -314.909  349562           359
             -314.909  127215           9
+            -314.909  484406           421
+            -314.909  178475           231
+            -314.909  443442           380
+            -314.909  950604           172
+            -314.909  606576           151
+            -314.909  85462            51
+            -314.909  402224           91
+            -314.909  252949           487
+            -314.909  456213           160
+            -314.909  314757           345
+            -314.909  840078           203
+            -314.909  81117            305
+            -314.909  754100           56
+            -316.610  273992           349
+            -316.610  137377           397
+            -316.610  354559           73
+            -316.610  168762           200
+            -316.610  407108           366
+            -316.610  726035           191
+            -316.610  313407           132
+            -316.610  636396           168
+            -316.610  170954           86
+            -316.610  614009           317
+            -316.610  576726           280
+            -316.610  282464           283
+            -316.610  340112           126
+            -316.610  466971           109
+            -316.610  377504           294
+            -316.610  686482           215
+            -316.610  436460           89
             -316.610  27071            15
+            -316.610  922596           456
+            -316.610  404510           442
+            -316.611  210870           383
+            -316.611  622860           259
+            -317.212  275475           413
+
+21 perturbed starting value run(s) did not converge or were rejected in the third stage.
 
 
 
@@ -196,8 +274,8 @@ BASED ON THE ESTIMATED MODEL
     Latent
    Classes
 
-       1         52.97394          0.51431
-       2          8.15395          0.07916
+       1          8.15395          0.07916
+       2         52.97395          0.51431
        3         41.87210          0.40653
 
 
@@ -207,8 +285,8 @@ BASED ON ESTIMATED POSTERIOR PROBABILITIES
     Latent
    Classes
 
-       1         52.97394          0.51431
-       2          8.15395          0.07916
+       1          8.15395          0.07916
+       2         52.97395          0.51431
        3         41.87210          0.40653
 
 
@@ -220,8 +298,8 @@ Class Counts and Proportions
     Latent
    Classes
 
-       1               53          0.51456
-       2                9          0.08738
+       1                9          0.08738
+       2               53          0.51456
        3               41          0.39806
 
 
@@ -235,9 +313,9 @@ by Latent Class (Column)
 
            1        2        3
 
-    1   0.991    0.008    0.001
-    2   0.041    0.861    0.098
-    3   0.001    0.000    0.999
+    1   0.861    0.041    0.098
+    2   0.008    0.991    0.001
+    3   0.000    0.001    0.999
 
 
 Classification Probabilities for the Most Likely Latent Class Membership (Column)
@@ -245,9 +323,9 @@ by Latent Class (Row)
 
            1        2        3
 
-    1   0.992    0.007    0.001
-    2   0.050    0.950    0.000
-    3   0.001    0.021    0.978
+    1   0.950    0.050    0.000
+    2   0.007    0.992    0.001
+    3   0.021    0.001    0.978
 
 
 Logits for the Classification Probabilities for the Most Likely Latent Class Membership (Column)
@@ -255,9 +333,9 @@ by Latent Class (Row)
 
               1        2        3
 
-    1      6.875    1.925    0.000
-    2     10.813   13.765    0.000
-    3     -6.748   -3.842    0.000
+    1     13.765   10.813    0.000
+    2      1.925    6.875    0.000
+    3     -3.842   -6.748    0.000
 
 
 MODEL RESULTS
@@ -268,17 +346,6 @@ MODEL RESULTS
 Latent Class 1
 
  Thresholds
-    M1$1              -3.220      0.729     -4.418      0.000
-    M2$1             -15.000      0.000    999.000    999.000
-    M3$1              -2.198      0.488     -4.504      0.000
-    M4$1              -2.469      0.615     -4.013      0.000
-    DISLIKE$1          2.500      0.522      4.791      0.000
-    PURSUE$1          -0.948      0.310     -3.060      0.002
-    BOYS$1             2.072      0.440      4.712      0.000
-
-Latent Class 2
-
- Thresholds
     M1$1             -15.000      0.000    999.000    999.000
     M2$1               1.973      2.001      0.986      0.324
     M3$1               0.980      0.893      1.097      0.273
@@ -286,6 +353,17 @@ Latent Class 2
     DISLIKE$1         15.000      0.000    999.000    999.000
     PURSUE$1          -0.770      0.919     -0.838      0.402
     BOYS$1             1.896      1.118      1.696      0.090
+
+Latent Class 2
+
+ Thresholds
+    M1$1              -3.220      0.729     -4.418      0.000
+    M2$1             -15.000      0.000    999.000    999.000
+    M3$1              -2.198      0.488     -4.504      0.000
+    M4$1              -2.469      0.615     -4.013      0.000
+    DISLIKE$1          2.500      0.522      4.791      0.000
+    PURSUE$1          -0.948      0.310     -3.060      0.002
+    BOYS$1             2.072      0.440      4.712      0.000
 
 Latent Class 3
 
@@ -301,8 +379,8 @@ Latent Class 3
 Categorical Latent Variables
 
  Means
-    C#1                0.235      0.212      1.108      0.268
-    C#2               -1.636      0.469     -3.490      0.000
+    C#1               -1.636      0.469     -3.490      0.000
+    C#2                0.235      0.212      1.108      0.268
 
 
 QUALITY OF NUMERICAL RESULTS
@@ -317,30 +395,6 @@ RESULTS IN PROBABILITY SCALE
                     Estimate       S.E.  Est./S.E.    P-Value
 
 Latent Class 1
-
- M1
-    Category 1         0.038      0.027      1.427      0.154
-    Category 2         0.962      0.027     35.719      0.000
- M2
-    Category 1         0.000      0.000      0.000      1.000
-    Category 2         1.000      0.000      0.000      1.000
- M3
-    Category 1         0.100      0.044      2.276      0.023
-    Category 2         0.900      0.044     20.507      0.000
- M4
-    Category 1         0.078      0.044      1.763      0.078
-    Category 2         0.922      0.044     20.822      0.000
- DISLIKE
-    Category 1         0.924      0.037     25.263      0.000
-    Category 2         0.076      0.037      2.074      0.038
- PURSUE
-    Category 1         0.279      0.062      4.481      0.000
-    Category 2         0.721      0.062     11.559      0.000
- BOYS
-    Category 1         0.888      0.044     20.334      0.000
-    Category 2         0.112      0.044      2.560      0.010
-
-Latent Class 2
 
  M1
     Category 1         0.000      0.000      0.000      1.000
@@ -363,6 +417,30 @@ Latent Class 2
  BOYS
     Category 1         0.869      0.127      6.851      0.000
     Category 2         0.131      0.127      1.028      0.304
+
+Latent Class 2
+
+ M1
+    Category 1         0.038      0.027      1.427      0.154
+    Category 2         0.962      0.027     35.719      0.000
+ M2
+    Category 1         0.000      0.000      0.000      1.000
+    Category 2         1.000      0.000      0.000      1.000
+ M3
+    Category 1         0.100      0.044      2.276      0.023
+    Category 2         0.900      0.044     20.507      0.000
+ M4
+    Category 1         0.078      0.044      1.763      0.078
+    Category 2         0.922      0.044     20.822      0.000
+ DISLIKE
+    Category 1         0.924      0.037     25.263      0.000
+    Category 2         0.076      0.037      2.074      0.038
+ PURSUE
+    Category 1         0.279      0.062      4.481      0.000
+    Category 2         0.721      0.062     11.559      0.000
+ BOYS
+    Category 1         0.888      0.044     20.334      0.000
+    Category 2         0.112      0.044      2.560      0.010
 
 Latent Class 3
 
@@ -397,21 +475,38 @@ LATENT CLASS INDICATOR ODDS RATIOS FOR THE LATENT CLASSES
 Latent Class 1 Compared to Latent Class 2
 
  M1
-    Category > 1       0.000      0.000      0.000      0.000
+    Category > 1   *********      0.000  *********  *********
  M2
-    Category > 1   *********      0.000  *********  *********
+    Category > 1       0.000      0.000      0.000      0.000
  M3
-    Category > 1      23.999     24.219      3.320    173.461
+    Category > 1       0.042      0.042      0.006      0.301
  M4
-    Category > 1      77.042    101.448      5.832   1017.657
+    Category > 1       0.013      0.017      0.001      0.171
  DISLIKE
-    Category > 1   *********      0.000  *********  *********
+    Category > 1       0.000      0.000      0.000      0.000
  PURSUE
-    Category > 1       1.195      1.171      0.175      8.155
+    Category > 1       0.837      0.820      0.123      5.712
  BOYS
-    Category > 1       0.839      1.020      0.077      9.094
+    Category > 1       1.193      1.450      0.110     12.932
 
 Latent Class 1 Compared to Latent Class 3
+
+ M1
+    Category > 1   *********      0.000  *********  *********
+ M2
+    Category > 1       1.306      2.716      0.022     76.880
+ M3
+    Category > 1       4.706      5.189      0.542     40.855
+ M4
+    Category > 1       1.932      2.519      0.150     24.891
+ DISLIKE
+    Category > 1       0.000      0.000      0.000      0.000
+ PURSUE
+    Category > 1       4.663      4.670      0.655     33.209
+ BOYS
+    Category > 1       6.052      9.271      0.301    121.849
+
+Latent Class 2 Compared to Latent Class 3
 
  M1
     Category > 1     524.864    658.785     44.837   6144.065
@@ -428,42 +523,15 @@ Latent Class 1 Compared to Latent Class 3
  BOYS
     Category > 1       5.075      5.610      0.582     44.291
 
-Latent Class 2 Compared to Latent Class 3
-
- M1
-    Category > 1   *********      0.000  *********  *********
- M2
-    Category > 1       1.306      2.716      0.022     76.879
- M3
-    Category > 1       4.706      5.189      0.542     40.855
- M4
-    Category > 1       1.932      2.519      0.150     24.891
- DISLIKE
-    Category > 1       0.000      0.000      0.000      0.000
- PURSUE
-    Category > 1       4.663      4.670      0.655     33.209
- BOYS
-    Category > 1       6.052      9.271      0.301    121.849
-
 
 MODEL COMMAND WITH FINAL ESTIMATES USED AS STARTING VALUES
 
      %OVERALL%
 
-     [ c#1*0.23518 ];
-     [ c#2*-1.63612 ];
+     [ c#1*-1.63612 ];
+     [ c#2*0.23518 ];
 
      %C#1%
-
-     [ m1$1*-3.22042 ];
-     [ m2$1*-15 ];
-     [ m3$1*-2.19818 ];
-     [ m4$1*-2.46880 ];
-     [ dislike$1*2.49986 ];
-     [ pursue$1*-0.94766 ];
-     [ boys$1*2.07249 ];
-
-     %C#2%
 
      [ m1$1*-15 ];
      [ m2$1*1.97250 ];
@@ -472,6 +540,16 @@ MODEL COMMAND WITH FINAL ESTIMATES USED AS STARTING VALUES
      [ dislike$1*15 ];
      [ pursue$1*-0.76962 ];
      [ boys$1*1.89644 ];
+
+     %C#2%
+
+     [ m1$1*-3.22042 ];
+     [ m2$1*-15 ];
+     [ m3$1*-2.19818 ];
+     [ m4$1*-2.46880 ];
+     [ dislike$1*2.49986 ];
+     [ pursue$1*-0.94766 ];
+     [ boys$1*2.07249 ];
 
      %C#3%
 
@@ -488,8 +566,8 @@ MODEL COMMAND WITH FINAL ESTIMATES USED AS STARTING VALUES
 TECHNICAL 11 OUTPUT
 
      Random Starts Specifications for the k-1 Class Analysis Model
-        Number of initial stage random starts                  20
-        Number of final stage optimizations                     4
+        Number of initial stage random starts                 500
+        Number of final stage optimizations                   100
 
 
 
@@ -511,8 +589,8 @@ TECHNICAL 11 OUTPUT
 TECHNICAL 14 OUTPUT
 
      Random Starts Specifications for the k-1 Class Analysis Model
-        Number of initial stage random starts                  20
-        Number of final stage optimizations                     4
+        Number of initial stage random starts                 500
+        Number of final stage optimizations                   100
 
      Random Starts Specification for the k-1 Class Model for Generated Data
         Number of initial stage random starts                   0
@@ -533,9 +611,9 @@ TECHNICAL 14 OUTPUT
           Successful Bootstrap Draws                            2
 
 
-     Beginning Time:  19:56:16
-        Ending Time:  19:56:16
-       Elapsed Time:  00:00:00
+     Beginning Time:  12:25:49
+        Ending Time:  12:25:50
+       Elapsed Time:  00:00:01
 
 
 

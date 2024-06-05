@@ -11,6 +11,7 @@ usevar = m1-boys;
 classes = c(2);
 ANALYSIS:
 estimator = mlr;
-    type = mixture;
+      type = mixture;
+      starts = 500 100;
 OUTPUT:
 tech11 tech14 svalues;

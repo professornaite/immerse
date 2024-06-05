@@ -1,6 +1,6 @@
 Mplus VERSION 8.11 (Mac)
 MUTHEN & MUTHEN
-06/04/2024   7:56 PM
+06/05/2024  12:25 PM
 
 INPUT INSTRUCTIONS
 
@@ -17,7 +17,8 @@ INPUT INSTRUCTIONS
   classes = c(2);
   ANALYSIS:
   estimator = mlr;
-      type = mixture;
+        type = mixture;
+        starts = 500 100;
   OUTPUT:
   tech11 tech14 svalues;
 
@@ -80,8 +81,8 @@ Maximum number of iterations for H1                           2000
 Convergence criterion for H1                             0.100D-03
 Optimization algorithm                                         EMA
 Random Starts Specifications
-  Number of initial stage random starts                         20
-  Number of final stage optimizations                            4
+  Number of initial stage random starts                        500
+  Number of final stage optimizations                          100
   Number of initial stage iterations                            10
   Initial stage convergence criterion                    0.100D+01
   Random starts scale                                    0.500D+01
@@ -134,10 +135,106 @@ RANDOM STARTS RESULTS RANKED FROM THE BEST TO THE WORST LOGLIKELIHOOD VALUES
 
 Final stage loglikelihood values at local maxima, seeds, and initial stage start numbers:
 
-            -321.237  93468            3
+            -321.237  830529           279
+            -321.237  81117            305
+            -321.237  350608           334
+            -321.237  273992           349
+            -321.237  315029           471
+            -321.237  164305           128
+            -321.237  784664           75
+            -321.237  605358           321
+            -321.237  215353           164
+            -321.237  402224           91
+            -321.237  496881           192
+            -321.237  570908           98
+            -321.237  928287           197
+            -321.237  371246           101
+            -321.237  749635           420
+            -321.237  375590           438
             -321.237  195873           6
+            -321.237  802779           122
+            -321.237  485483           498
+            -321.237  192071           142
+            -321.237  863094           147
+            -321.237  51375            148
+            -321.237  679832           302
+            -321.237  857799           315
+            -321.237  782200           84
+            -321.237  860772           174
+            -321.237  488125           368
+            -321.237  813779           92
+            -321.237  848890           95
+            -321.237  85114            385
+            -321.237  124999           96
+            -321.237  137377           397
+            -321.237  65651            214
+            -321.237  100874           108
+            -321.237  399848           220
+            -321.237  392407           221
+            -321.237  587946           120
+            -321.237  455617           242
+            -321.237  715561           125
+            -321.237  220454           288
+            -321.237  966014           37
+            -321.237  996231           310
+            -321.237  173440           328
+            -321.237  392766           331
+            -321.237  836515           341
+            -321.237  21132            351
+            -321.237  360419           356
+            -321.237  137305           379
+            -321.237  761633           50
             -321.237  253358           2
+            -321.237  178475           231
+            -321.237  616917           261
+            -321.237  534483           290
+            -321.237  369602           146
+            -321.237  798839           312
+            -321.237  918558           412
+            -321.237  505879           424
+            -321.237  89970            223
+            -321.237  576220           115
+            -321.237  392418           28
+            -321.237  366706           29
+            -321.237  782821           272
+            -321.237  407168           44
+            -321.237  561664           392
+            -321.237  68850            462
+            -321.237  860102           495
+            -321.237  260601           36
+            -321.237  252949           487
+            -321.237  282464           283
+            -321.237  724519           333
+            -321.237  862607           468
+            -321.237  804561           59
+            -321.237  732596           320
+            -321.237  871722           355
+            -321.237  123985           248
+            -321.237  259507           53
+            -321.237  887580           493
+            -321.237  887676           22
+            -321.237  354208           196
+            -321.237  582296           452
+            -321.237  97158            205
+            -321.237  665121           417
+            -321.237  335485           496
+            -321.237  298275           418
+            -321.237  596257           405
+            -321.237  830570           369
+            -321.237  701525           239
+            -321.237  281462           285
+            -321.237  790059           469
+            -321.237  965994           396
+            -321.237  754100           56
+            -321.237  370466           41
+            -321.237  539751           459
+            -321.237  456213           160
+            -321.237  79945            395
+            -321.237  284109           82
+            -321.237  951709           348
+            -321.237  609185           181
             -321.237  76974            16
+            -321.237  193847           354
 
 
 
@@ -401,8 +498,8 @@ MODEL COMMAND WITH FINAL ESTIMATES USED AS STARTING VALUES
 TECHNICAL 11 OUTPUT
 
      Random Starts Specifications for the k-1 Class Analysis Model
-        Number of initial stage random starts                  20
-        Number of final stage optimizations                     4
+        Number of initial stage random starts                 500
+        Number of final stage optimizations                   100
 
 
 
@@ -424,8 +521,8 @@ TECHNICAL 11 OUTPUT
 TECHNICAL 14 OUTPUT
 
      Random Starts Specifications for the k-1 Class Analysis Model
-        Number of initial stage random starts                  20
-        Number of final stage optimizations                     4
+        Number of initial stage random starts                 500
+        Number of final stage optimizations                   100
 
      Random Starts Specification for the k-1 Class Model for Generated Data
         Number of initial stage random starts                   0
@@ -446,9 +543,9 @@ TECHNICAL 14 OUTPUT
           Successful Bootstrap Draws                            5
 
 
-     Beginning Time:  19:56:16
-        Ending Time:  19:56:16
-       Elapsed Time:  00:00:00
+     Beginning Time:  12:25:48
+        Ending Time:  12:25:49
+       Elapsed Time:  00:00:01
 
 
 
