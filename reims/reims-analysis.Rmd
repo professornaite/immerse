@@ -283,7 +283,8 @@ lca_4 <- lapply(1:4, function(k) {
     
     ANALYSIS =
       "estimator = mlr;
-    type = mixture;",
+      type = mixture;
+      starts = 500 100;",
     
     OUTPUT = "tech11 tech14 svalues;",
     
@@ -298,7 +299,36 @@ lca_4 <- lapply(1:4, function(k) {
 
 ### table of fit
 
+We want to begin by extracting the data:
 
+```{r}
+output_reims1 <- readModels(here("reims", "enum"))
+
+enum_extract <- LatexSummaryTable(
+  output_reims1,
+  keepCols = c(
+    "Title",
+    "Parameters",
+    "LL",
+    "BIC",
+    "aBIC",
+    "BLRT_PValue",
+    "Observations"
+  ),
+  sortBy = "Title"
+) # select first set of models (Class 1 through 4)
+
+allFit <- enum_extract %>% 
+  mutate(CAIC = -2 * LL + Parameters * (log(Observations) + 1)) %>% 
+  mutate(AWE = -2 * LL + 2 * Parameters * (log(Observations) + 1.5)) %>% 
+  mutate(SIC = -.5 * BIC) %>% 
+  mutate(expSIC = exp(SIC - max(SIC))) %>% 
+  mutate(BF = exp(SIC - lead(SIC))) %>% 
+  mutate(cmPk = expSIC / sum(expSIC)) %>% 
+  dplyr::select(1:5, 9:10, 6:7, 13) %>% # removed 14 from original code
+  arrange(Parameters)
+```
+Then, create a table:
 ---
 
 This file is based on resources provided at the Institute of Mixture Modeling for Equity-Oriented Researchers, Scholars, and Educators (2024). IMMERSE In-Person Training Workshop (IES No. 305B220021).
