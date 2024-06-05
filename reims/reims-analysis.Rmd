@@ -419,6 +419,89 @@ save the table:
 ```{r}
 gtsave(fit_table, here("figures", "fit_table.png"))
 ```
+
+### Information Criterion Plot
+
+```{r height=5, width=7}
+allFit %>%
+  dplyr::select(2:7) %>%
+  rowid_to_column() %>%
+  pivot_longer(`BIC`:`AWE`,
+               names_to = "Index",
+               values_to = "ic_value") %>%
+  mutate(Index = factor(Index,
+                        levels = c ("AWE", "CAIC", "BIC", "aBIC"))) %>%
+  ggplot(aes(
+    x = rowid,
+    y = ic_value,
+    color = Index,
+    shape = Index,
+    group = Index,
+    lty = Index
+  )) +
+  geom_point(size = 2.0) + geom_line(size = .8) +
+  scale_x_continuous(breaks = 1:nrow(allFit)) +
+  scale_colour_grey(end = .5) +
+  theme_cowplot() +
+  labs(x = "Number of Classes", y = "Information Criteria Value", title = "Information Criteria") +
+  theme(
+    text = element_text(family = "serif", size = 12),
+    legend.text = element_text(family="serif", size=12),
+    legend.key.width = unit(3, "line"),
+    legend.title = element_blank(),
+    legend.position = "top"  
+  )
+```
+
+save the figure:
+
+```{r}
+ggsave(here("figures", "info_criteria.png"), dpi=300, height=5, width=7, units="in")
+```
+
+### Compare class solutions
+
+Compare probability plots for $K = 1:4$ class solutions
+
+```{r}
+model_results <- data.frame()
+
+for (i in 1:length(output_reims1)) {
+  temp <- output_reims1[[i]]$parameters$probability.scale %>% 
+    mutate(model = paste0(i, "-Class Model"))
+  
+  model_results <- rbind(model_results, temp)
+}
+
+compare_plot <-
+  model_results %>% 
+  filter(category ==2) %>% 
+  dplyr::select(est, model, LatentClass, param)
+
+compare_plot$param <- fct_inorder(compare_plot$param)
+
+ggplot(
+  compare_plot,
+  aes(
+    x=param,
+    y=est,
+    color = LatentClass,
+    shape = LatentClass,
+    group = LatentClass,
+    lty = LatentClass
+  )
+) +
+  geom_point() +
+  geom_line() +
+  scale_color_viridis_d() +
+  facet_wrap(~ model, ncol = 2) +
+  labs(title = "Mathematics Identity Items", x = " ", y = "Probability") +
+  theme_minimal() +
+  theme(panel.grid.major.y = element_blank(),
+        axis.text.x = element_text(angle = -45, hjust = -.1))
+
+```
+
 ---
 
 This file is based on resources provided at the Institute of Mixture Modeling for Equity-Oriented Researchers, Scholars, and Educators (2024). IMMERSE In-Person Training Workshop (IES No. 305B220021).
