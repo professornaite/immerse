@@ -302,7 +302,7 @@ lca_4 <- lapply(1:4, function(k) {
 We want to begin by extracting the data:
 
 ```{r}
-output_reims1 <- readModels(here("reims", "enum"))
+output_reims1 <- readModels(here("enum"))
 
 enum_extract <- LatexSummaryTable(
   output_reims1,
@@ -313,6 +313,7 @@ enum_extract <- LatexSummaryTable(
     "BIC",
     "aBIC",
     "BLRT_PValue",
+    "T11_VLMR_PValue",
     "Observations"
   ),
   sortBy = "Title"
@@ -325,10 +326,99 @@ allFit <- enum_extract %>%
   mutate(expSIC = exp(SIC - max(SIC))) %>% 
   mutate(BF = exp(SIC - lead(SIC))) %>% 
   mutate(cmPk = expSIC / sum(expSIC)) %>% 
-  dplyr::select(1:5, 9:10, 6:7, 13) %>% # removed 14 from original code
+  dplyr::select(1:5, 9:10, 6:7, 13, 14) %>%
   arrange(Parameters)
 ```
-Then, create a table:
+Then we create a table:
+
+```{r}
+fit_table <- allFit %>%
+  gt() %>%
+  tab_header(title = md("**Model Fit Summary Table**")) %>%
+  cols_label(
+    Title = "Classes",
+    Parameters = md("Par"),
+    LL = md("*LL*"),
+    T11_VLMR_PValue = "VLMR",
+    BLRT_PValue = "BLRT",
+    BF = md("BF"),
+    cmPk = md("*cmPk*")
+  ) %>%
+  tab_footnote(
+    footnote = md(
+      "*Note.* Par = Parameters; *LL* = model log likelihood;
+BIC = Bayesian information criterion;
+aBIC = sample size adjusted BIC; CAIC = consistent Akaike information criterion;
+AWE = approximate weight of evidence criterion;
+BLRT = bootstrapped likelihood ratio test p-value;
+VLMR = Vuong-Lo-Mendell-Rubin adjusted likelihood ratio test p-value;
+*cmPk* = approximate correct model probability."
+    ),
+locations = cells_title()
+  ) %>%
+  tab_options(column_labels.font.weight = "bold") %>%
+  fmt_number(c(3:7),
+             decimals = 2) %>%
+  sub_missing(1:11,
+              missing_text = "--") %>%
+  fmt(
+    c(8:9, 11),
+    fns = function(x)
+      ifelse(x < 0.001, "<.001",
+             scales::number(x, accuracy = .01))
+  ) %>%
+  fmt(
+    10,
+    fns = function (x)
+      ifelse(x > 100, ">100",
+             scales::number(x, accuracy = .01))
+  ) %>%  
+  tab_style(
+    style = list(
+      cell_text(weight = "bold")
+
+            ),
+    locations = list(cells_body(
+     columns = BIC,
+     row = BIC == min(BIC[1:6]) # Change this to the number of classes you estimated
+    ),
+    cells_body(
+     columns = aBIC,
+     row = aBIC == min(aBIC[1:6])
+    ),
+    cells_body(
+     columns = CAIC,
+     row = CAIC == min(CAIC[1:6])
+    ),
+    cells_body(
+     columns = AWE,
+     row = AWE == min(AWE[1:6])
+    ),
+    cells_body(
+     columns = cmPk,
+     row =  cmPk == max(cmPk[1:6])
+     ),    
+    cells_body(
+     columns = BF,
+     row =  BF > 10),
+    cells_body( 
+     columns =  T11_VLMR_PValue,
+     row =  ifelse(T11_VLMR_PValue < .001 & lead(T11_VLMR_PValue) > .05, T11_VLMR_PValue < .001, NA)),
+    cells_body(
+     columns =  BLRT_PValue,
+     row =  ifelse(BLRT_PValue < .001 & lead(BLRT_PValue) > .05, BLRT_PValue < .001, NA))
+  )
+) 
+
+fit_table
+
+```
+
+save the table:
+
+```{r}
+gtsave(fit_table, here("figures", "fit_table.png"))
+```
 ---
 
 This file is based on resources provided at the Institute of Mixture Modeling for Equity-Oriented Researchers, Scholars, and Educators (2024). IMMERSE In-Person Training Workshop (IES No. 305B220021).
