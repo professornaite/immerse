@@ -296,6 +296,10 @@ lca_4 <- lapply(1:4, function(k) {
                                check = T, run = T, hashfilename = F)})
 ```
 
+### table of fit
+
+
+---
 
 This file is based on resources provided at the Institute of Mixture Modeling for Equity-Oriented Researchers, Scholars, and Educators (2024). IMMERSE In-Person Training Workshop (IES No. 305B220021).
 Institute of Education Sciences.
