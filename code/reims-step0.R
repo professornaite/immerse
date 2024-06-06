@@ -9,9 +9,12 @@ View(reims)
 head(reims)
 tail(reims)
 
+table(reims$sex)
 table(reims$dislikemathclass)
 
 # create dichotomous indicators
+# four point likert scale: 
+# not at all true, a little true, fairly true, very true
 reims %>% 
   mutate_at(c(2:54), funs(recode(., `1`=0, `2`=0, `3`=1, `4`=1, .default = NaN))) -> reims.dummy
 reims.dummy
@@ -23,6 +26,8 @@ table(reims.dummy$dislikemathclass)
 # reverse code boys do better
 reims.dummy$boysbetter <- ifelse(reims.dummy$boysbetter == 1, 1, 0)
 table(reims.dummy$boysbetter)
+reims.dummy$female <- ifelse(reims.dummy$sex == 2, 0, 1)
+table(reims.dummy$female)
 
 # label of factors
 # math identity: mathperson1 mathperson2 mathperson3 mathperson4 dislikemathclass pursuestem 
@@ -35,8 +40,8 @@ table(reims.dummy$boysbetter)
 
 # subset the dichotomous data
 test.df <- reims.dummy %>% 
-  select(c(1:54), age, sex, race) %>% 
-  relocate(groupflag, age, sex, race) %>% 
+  select(c(1:54), age, female, race) %>% 
+  relocate(groupflag, age, female, race) %>% 
   drop_na()
 test.df 
 

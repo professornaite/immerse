@@ -30,6 +30,7 @@ library(tidyverse) #collection of R packages designed for data science
 library(here) #helps with filepaths
 library(gt) # creates tables
 library(DiagrammeR) # create path diagrams
+library(data.table) # use for `melt()` function
 here::i_am("reims-analysis.Rmd")
 ```
 
@@ -169,7 +170,7 @@ grViz(" digraph model {
 # One for measured variables (box) 
 
     node [shape=box]
-    mathperson1 mathperson2 mathperson3 mathperson4 dislikemathclass pursuestem boysbetter;
+    mathperson1 mathperson2 mathperson3 mathperson4 dislikemathclass pursuestem;
  
 # One for latent variables (circle) 
  
@@ -179,7 +180,7 @@ grViz(" digraph model {
 # `edge` statements
  
     edge [minlen = 2]
-    lca -> {mathperson1 mathperson2 mathperson3 mathperson4 dislikemathclass pursuestem boysbetter}
+    lca -> {mathperson1 mathperson2 mathperson3 mathperson4 dislikemathclass pursuestem}
  
  }") 
 ```
@@ -190,8 +191,8 @@ grViz(" digraph model {
 
 input <- mplusObject(
   TITLE = "REIMS Mathematics Identity Model 2",
-  VARIABLE = "categorical = m1 m2 m3 m4 dislike pursue boys;
-  usevar = m1-boys;
+  VARIABLE = "categorical = m1 m2 m3 m4 dislike pursue;
+  usevar = m1-pursue;
   classes = c(4);",
   
   ANALYSIS =
@@ -201,7 +202,7 @@ input <- mplusObject(
   OUTPUT = "tech11 tech14;",
   
   PLOT = "type = plot3;
-    series = m1-boys(*);",
+    series = m1-pursue(*);",
   
   usevariables = colnames(reims1),
   rdata = reims1)
@@ -237,13 +238,13 @@ library(cowplot)
 library(glue)
 ```
 
-Proporion of indicators using R:
+Proportion of indicators using R:
 
 ```{r}
 
 # set up data to find proportions of binary indicators
 df <- reims1 %>% 
-  pivot_longer(c(m1, m2, m3, m4, dislike, pursue, boys),
+  pivot_longer(c(m1, m2, m3, m4, dislike, pursue),
   names_to = "Variable")
 
 # create table of variables and counts
@@ -277,8 +278,8 @@ lca_4 <- lapply(1:4, function(k) {
     TITLE = glue("{k}-Class"),
     
     VARIABLE = glue(
-      "categorical m1-boys;
-      usevar = m1-boys;
+      "categorical m1-pursue;
+      usevar = m1-pursue;
       classes = c({k});"),
     
     ANALYSIS =
@@ -527,10 +528,18 @@ save the figure:
 ggsave(here("figures", "probability_plot_4class.png"), dpi="retina", height=5, width=7, units="in")
 ```
 
+### 3-Class Probability Plot
+
+```{r fig.height=6, fig.width=10}
+source("plot_lca.txt")
+
+plot_lca(model_name = output_reims1$c3_reims1.out)
+
+```
+
 ### 2-Class Probability Plot
 
 ```{r fig.height=6, fig.width=10}
-
 source("plot_lca.txt")
 
 plot_lca(model_name = output_reims1$c2_reims1.out)
@@ -554,8 +563,8 @@ patterns  <- mplusObject(
   TITLE = "LCA - Save response patterns", 
   
   VARIABLE = 
-  "categorical = m1-boys; 
-   usevar =  m1-boys;
+  "categorical = m1-pursue; 
+   usevar =  m1-pursue;
    classes = c(4);",
   
   ANALYSIS = 
@@ -587,7 +596,6 @@ patterns_fit <- mplusModeler(patterns,
 read in observed response pattern data and relabel the columns:
 
 ```{r}
-
 # read in response frequency data that we just created:
 patterns <- read_table(here("mplus", "resp_patterns.dat"),
                         col_names=FALSE, na = "*") 
@@ -640,7 +648,6 @@ resp_table <- response_patterns %>%
     M4 = "Math Person 4",
     DISLIKE = "Dislike Math",
     PURSUE = "Pursue Math",
-    BOYS = "Boys Better",
     CPROB1 = html("P<sub><i>k</i></sub>=1"),
     CPROB2 = html("P<sub><i>k</i></sub>=2"),
     CPROB3 = html("P<sub><i>k</i></sub>=3"),
@@ -651,13 +658,13 @@ resp_table <- response_patterns %>%
     rows = 1:5) %>%
   tab_row_group(
     label = md("*k* = 1 Conditional response patterns"),
-    rows = 6:10) %>% #EDIT THESE VALUES BASED ON THE LAST COLUMN
+    rows = 6) %>% #EDIT THESE VALUES BASED ON THE LAST COLUMN
   tab_row_group(
     label = md("*k* = 2 Conditional response patterns"),
-    rows = 11:15)  %>% #EDIT THESE VALUES BASED ON THE LAST COLUMN
+    rows = 7:11)  %>% #EDIT THESE VALUES BASED ON THE LAST COLUMN
   tab_row_group(
     label = md("*k* = 3 Conditional response patterns"),
-    rows = 16)  %>% #EDIT THESE VALUES BASED ON THE LAST COLUMN
+    rows = 12:16)  %>% #EDIT THESE VALUES BASED ON THE LAST COLUMN
   tab_row_group(
     label = md("*k* = 4 Conditional response patterns"),
     rows = 17:21)  %>% #EDIT THESE VALUES BASED ON THE LAST COLUMN  
@@ -697,8 +704,8 @@ classification <- mplusObject(
   TITLE = "LCA - Calculate k-Class 95% CI",
   
   VARIABLE =
-    "categorical = m1-boys;
-    usevar = m1-boys;
+    "categorical = m1-pursue;
+    usevar = m1-pursue;
     classes = c(4);",
   
   ANALYSIS =
@@ -813,7 +820,7 @@ gtsave(class_table, here("figures", "class_table.png"))
 
 ## Model 3
 
-We will now add auxiliary variables to our model.
+We will now add auxiliary variables to our model and name it model 3.
 
 ```{r, echo=F, eval=T, fig.align='center'}
 
@@ -828,7 +835,7 @@ grViz(" digraph model {
 # One for measured variables (box) 
 
     node [shape=box]
-    mathperson1 mathperson2 mathperson3 mathperson4 dislikemathclass pursuestem boysbetter;
+    mathperson1 mathperson2 mathperson3 mathperson4 dislikemathclass pursuestem;
  
 # One for latent variables (circle) 
  
@@ -838,17 +845,104 @@ grViz(" digraph model {
 # `edge` statements
  
     edge [minlen = 2]
-    lca -> {mathperson1 mathperson2 mathperson3 mathperson4 dislikemathclass pursuestem boysbetter}
+    lca -> {mathperson1 mathperson2 mathperson3 mathperson4 dislikemathclass pursuestem}
     
     node [shape=box]
-    gender -> lca ;
+    female -> lca ;
     age -> lca;
-    race -> lca;
  
  }") 
 ```
 
+
+### Manual 3-step latent class regression with 3 covariates
+
+Integrate covariates and with the mixture model
+
+```{r}
+# indicators and variables for full model build
+
+tribble(
+  ~"Name", ~"Variable Description",
+  #----------|----------|,
+  "mathperson1","text.",
+  "mathperson2","text.",
+  "mathperson3","text.",
+  "mathperson4","text.",
+  "dislikemathclass","text.",
+  "pursuestem","text.",
+  "female","Self-reported sex (0=male, 1=female)",
+  "age", "Self-reporeted age") %>% 
+  gt() %>% 
+  tab_header(title = md("**LCA Indicators & Auxilary Variables: Mathematics Identity Example**"), subtitle = md("&nbsp;")) %>% 
+  tab_row_group(group = "", rows = 1:6) %>% 
+  tab_row_group(group = "Auxilary Variables", rows = 7:8) %>% 
+  row_group_order(groups = c("", "Auxilary Variables")) %>% 
+  tab_options(column_labels.font.weight = "bold",
+              row_group.font.weight = "bold")
+
+```
+
+### Step 1: Class enumeration with auxilary specification
+
+```{r}
+# add female variable from original reims data
+reims$sex
+reims1$female <- reims$sex
+reims1$age <- reims$age
+```
+
+```{r, eval = F}
+
+step1 <- mplusObject(
+  TITLE = "STEP 1 - THREE-STEP USING LSAL",
+  VARIABLE = 
+    "categorical = m1-pursue;
+    usevar = m1-pursue;
+    classes = c(3);
+    
+    auxiliary = ! list all potential covariates and distals here
+    
+    female  ! covariate
+    age     ! covariate",
+  
+  ANALYSIS = 
+    "estimator = mlr;
+    type = mixture;
+    starts = 500 100;",
+  
+  SAVEDATA =
+    "File=3step_savedata.dat;
+    Save=cprob;",
+  
+  OUTPUT = "residual tech11 tech14",
+  
+  PLOT =
+    "type = plot3;
+    series = m1-pursue(*);",
+  
+  usevariables = colnames(reims1),
+  rdata = reims1)
+
+step1_fit <- mplusModeler(step1, 
+                          dataout=here("manual", "Step1.dat"),
+                          modelout=here("manual","one.inp"),
+                          check=T, run=T, hashfilename = F)
+
+```
+
+save the plot
+
+```{r, fig.height=6, fig.width=10}
+source("plot_lca.txt")
+
+output_reims1 <- readModels(here("manual","one.out"))
+
+plot_lca(model_name = output_reims1)
+```
+
 ---
+
 This file is based on resources provided by the Institute of Mixture Modeling for Equity-Oriented Researchers, Scholars, and Educators (2024). IMMERSE In-Person Training Workshop (IES No. 305B220021).
 Institute of Education Sciences.
 <https://immerse-ucsb.github.io/pre-training>

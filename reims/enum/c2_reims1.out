@@ -1,6 +1,6 @@
 Mplus VERSION 8.11 (Mac)
 MUTHEN & MUTHEN
-06/05/2024   3:25 PM
+06/05/2024   7:31 PM
 
 INPUT INSTRUCTIONS
 
@@ -12,8 +12,8 @@ INPUT INSTRUCTIONS
   VARIABLE:
   NAMES = m1 m2 m3 m4 dislike pursue boys;
    MISSING=.;
-   categorical m1-boys;
-  usevar = m1-boys;
+   categorical m1-pursue;
+  usevar = m1-pursue;
   classes = c(2);
   ANALYSIS:
   estimator = mlr;
@@ -36,7 +36,7 @@ SUMMARY OF ANALYSIS
 Number of groups                                                 1
 Number of observations                                         103
 
-Number of dependent variables                                    7
+Number of dependent variables                                    6
 Number of independent variables                                  0
 Number of continuous latent variables                            0
 Number of categorical latent variables                           1
@@ -45,7 +45,6 @@ Observed dependent variables
 
   Binary and ordered categorical (ordinal)
    M1          M2          M3          M4          DISLIKE     PURSUE
-   BOYS
 
 Categorical latent variables
    C
@@ -126,115 +125,112 @@ UNIVARIATE PROPORTIONS AND COUNTS FOR CATEGORICAL VARIABLES
     PURSUE
       Category 1    0.447           46.000
       Category 2    0.553           57.000
-    BOYS
-      Category 1    0.922           95.000
-      Category 2    0.078            8.000
 
 
 RANDOM STARTS RESULTS RANKED FROM THE BEST TO THE WORST LOGLIKELIHOOD VALUES
 
 Final stage loglikelihood values at local maxima, seeds, and initial stage start numbers:
 
-            -321.237  830529           279
-            -321.237  81117            305
-            -321.237  350608           334
-            -321.237  273992           349
-            -321.237  315029           471
-            -321.237  164305           128
-            -321.237  784664           75
-            -321.237  605358           321
-            -321.237  215353           164
-            -321.237  402224           91
-            -321.237  496881           192
-            -321.237  570908           98
-            -321.237  928287           197
-            -321.237  371246           101
-            -321.237  749635           420
-            -321.237  375590           438
-            -321.237  195873           6
-            -321.237  802779           122
-            -321.237  485483           498
-            -321.237  192071           142
-            -321.237  863094           147
-            -321.237  51375            148
-            -321.237  679832           302
-            -321.237  857799           315
-            -321.237  782200           84
-            -321.237  860772           174
-            -321.237  488125           368
-            -321.237  813779           92
-            -321.237  848890           95
-            -321.237  85114            385
-            -321.237  124999           96
-            -321.237  137377           397
-            -321.237  65651            214
-            -321.237  100874           108
-            -321.237  399848           220
-            -321.237  392407           221
-            -321.237  587946           120
-            -321.237  455617           242
-            -321.237  715561           125
-            -321.237  220454           288
-            -321.237  966014           37
-            -321.237  996231           310
-            -321.237  173440           328
-            -321.237  392766           331
-            -321.237  836515           341
-            -321.237  21132            351
-            -321.237  360419           356
-            -321.237  137305           379
-            -321.237  761633           50
-            -321.237  253358           2
-            -321.237  178475           231
-            -321.237  616917           261
-            -321.237  534483           290
-            -321.237  369602           146
-            -321.237  798839           312
-            -321.237  918558           412
-            -321.237  505879           424
-            -321.237  89970            223
-            -321.237  576220           115
-            -321.237  392418           28
-            -321.237  366706           29
-            -321.237  782821           272
-            -321.237  407168           44
-            -321.237  561664           392
-            -321.237  68850            462
-            -321.237  860102           495
-            -321.237  260601           36
-            -321.237  252949           487
-            -321.237  282464           283
-            -321.237  724519           333
-            -321.237  862607           468
-            -321.237  804561           59
-            -321.237  732596           320
-            -321.237  871722           355
-            -321.237  123985           248
-            -321.237  259507           53
-            -321.237  887580           493
-            -321.237  887676           22
-            -321.237  354208           196
-            -321.237  582296           452
-            -321.237  97158            205
-            -321.237  665121           417
-            -321.237  335485           496
-            -321.237  298275           418
-            -321.237  596257           405
-            -321.237  830570           369
-            -321.237  701525           239
-            -321.237  281462           285
-            -321.237  790059           469
-            -321.237  965994           396
-            -321.237  754100           56
-            -321.237  370466           41
-            -321.237  539751           459
-            -321.237  456213           160
-            -321.237  79945            395
-            -321.237  284109           82
-            -321.237  951709           348
-            -321.237  609185           181
-            -321.237  76974            16
-            -321.237  193847           354
+            -294.074  371246           101
+            -294.074  576596           99
+            -294.074  404510           442
+            -294.074  871851           257
+            -294.074  76974            16
+            -294.074  614009           317
+            -294.074  567165           319
+            -294.074  352277           42
+            -294.074  529496           343
+            -294.074  570782           193
+            -294.074  195873           6
+            -294.074  156536           245
+            -294.074  603842           61
+            -294.074  483369           270
+            -294.074  987090           70
+            -294.074  342019           301
+            -294.074  484687           306
+            -294.074  414284           158
+            -294.074  957392           79
+            -294.074  215353           164
+            -294.074  82357            339
+            -294.074  644297           340
+            -294.074  407168           44
+            -294.074  416250           390
+            -294.074  570908           98
+            -294.074  748692           204
+            -294.074  76451            211
+            -294.074  259507           53
+            -294.074  66276            217
+            -294.074  939709           112
+            -294.074  392418           28
+            -294.074  136842           58
+            -294.074  425982           485
+            -294.074  635245           121
+            -294.074  860102           495
+            -294.074  285380           1
+            -294.074  282464           283
+            -294.074  391179           78
+            -294.074  217744           326
+            -294.074  900268           327
+            -294.074  669634           335
+            -294.074  780698           337
+            -294.074  875667           367
+            -294.074  329127           185
+            -294.074  793035           187
+            -294.074  674171           195
+            -294.074  926797           406
+            -294.074  238906           430
+            -294.074  283492           435
+            -294.074  375590           438
+            -294.074  741484           441
+            -294.074  629320           222
+            -294.074  614535           449
+            -294.074  224950           455
+            -294.074  539751           459
+            -294.074  349360           464
+            -294.074  863691           481
+            -294.074  354395           486
+            -294.074  760878           249
+            -294.074  789985           67
+            -294.074  417035           149
+            -294.074  951709           348
+            -294.074  526324           178
+            -294.074  30098            209
+            -294.074  455617           242
+            -294.074  471438           252
+            -294.074  81117            305
+            -294.074  153394           429
+            -294.074  217130           443
+            -294.074  92689            304
+            -294.074  137305           379
+            -294.074  836515           341
+            -294.074  456213           160
+            -294.074  347515           24
+            -294.074  131856           90
+            -294.074  749635           420
+            -294.074  534864           307
+            -294.074  608460           244
+            -294.074  937225           394
+            -294.074  840031           276
+            -294.074  787985           482
+            -294.074  202790           198
+            -294.074  971693           470
+            -294.074  640833           434
+            -294.074  387701           275
+            -294.074  314757           345
+            -294.074  790059           469
+            -294.074  335485           496
+            -294.074  573096           20
+            -294.074  181293           212
+            -294.074  281462           285
+            -294.074  965994           396
+            -294.074  918558           412
+            -294.074  496881           192
+            -294.074  89970            223
+            -294.074  915642           40
+            -294.074  124999           96
+            -294.074  216565           474
+            -294.074  879338           309
+            -294.074  313407           132
 
 
 
@@ -255,19 +251,19 @@ THE MODEL ESTIMATION TERMINATED NORMALLY
 
 MODEL FIT INFORMATION
 
-Number of Free Parameters                       15
+Number of Free Parameters                       13
 
 Loglikelihood
 
-          H0 Value                        -321.237
-          H0 Scaling Correction Factor      1.0014
+          H0 Value                        -294.074
+          H0 Scaling Correction Factor      1.0015
             for MLR
 
 Information Criteria
 
-          Akaike (AIC)                     672.475
-          Bayesian (BIC)                   711.996
-          Sample-Size Adjusted BIC         664.613
+          Akaike (AIC)                     614.148
+          Bayesian (BIC)                   648.400
+          Sample-Size Adjusted BIC         607.335
             (n* = (n + 2) / 24)
 
 Chi-Square Test of Model Fit for the Binary and Ordered Categorical
@@ -275,15 +271,15 @@ Chi-Square Test of Model Fit for the Binary and Ordered Categorical
 
           Pearson Chi-Square
 
-          Value                             68.010
-          Degrees of Freedom                   112
-          P-Value                           0.9997
+          Value                             41.425
+          Degrees of Freedom                    50
+          P-Value                           0.8008
 
           Likelihood Ratio Chi-Square
 
-          Value                             49.459
-          Degrees of Freedom                   112
-          P-Value                           1.0000
+          Value                             35.688
+          Degrees of Freedom                    50
+          P-Value                           0.9367
 
 
 
@@ -293,8 +289,8 @@ BASED ON THE ESTIMATED MODEL
     Latent
    Classes
 
-       1         53.52985          0.51971
-       2         49.47015          0.48029
+       1         49.42970          0.47990
+       2         53.57030          0.52010
 
 
 FINAL CLASS COUNTS AND PROPORTIONS FOR THE LATENT CLASSES
@@ -303,8 +299,8 @@ BASED ON ESTIMATED POSTERIOR PROBABILITIES
     Latent
    Classes
 
-       1         53.52985          0.51971
-       2         49.47015          0.48029
+       1         49.42970          0.47990
+       2         53.57030          0.52010
 
 
 FINAL CLASS COUNTS AND PROPORTIONS FOR THE LATENT CLASSES
@@ -315,8 +311,8 @@ Class Counts and Proportions
     Latent
    Classes
 
-       1               54          0.52427
-       2               49          0.47573
+       1               49          0.47573
+       2               54          0.52427
 
 
 CLASSIFICATION QUALITY
@@ -329,8 +325,8 @@ by Latent Class (Column)
 
            1        2
 
-    1   0.990    0.010
-    2   0.001    0.999
+    1   0.999    0.001
+    2   0.009    0.991
 
 
 Classification Probabilities for the Most Likely Latent Class Membership (Column)
@@ -338,8 +334,8 @@ by Latent Class (Row)
 
            1        2
 
-    1   0.999    0.001
-    2   0.011    0.989
+    1   0.990    0.010
+    2   0.001    0.999
 
 
 Logits for the Classification Probabilities for the Most Likely Latent Class Membership (Column)
@@ -347,8 +343,8 @@ by Latent Class (Row)
 
               1        2
 
-    1      6.833    0.000
-    2     -4.530    0.000
+    1      4.597    0.000
+    2     -6.737    0.000
 
 
 MODEL RESULTS
@@ -359,29 +355,27 @@ MODEL RESULTS
 Latent Class 1
 
  Thresholds
-    M1$1              -3.236      0.733     -4.418      0.000
-    M2$1             -15.000      0.000    999.000    999.000
-    M3$1              -2.146      0.463     -4.638      0.000
-    M4$1              -2.351      0.506     -4.647      0.000
-    DISLIKE$1          2.520      0.525      4.798      0.000
-    PURSUE$1          -0.951      0.307     -3.103      0.002
-    BOYS$1             2.070      0.434      4.772      0.000
+    M1$1               1.441      0.370      3.891      0.000
+    M2$1               2.318      0.528      4.393      0.000
+    M3$1               2.170      0.477      4.552      0.000
+    M4$1               2.399      0.521      4.603      0.000
+    DISLIKE$1          0.220      0.290      0.759      0.448
+    PURSUE$1           0.526      0.297      1.771      0.077
 
 Latent Class 2
 
  Thresholds
-    M1$1               1.437      0.370      3.885      0.000
-    M2$1               2.309      0.527      4.384      0.000
-    M3$1               2.169      0.476      4.553      0.000
-    M4$1               2.397      0.521      4.599      0.000
-    DISLIKE$1          0.221      0.290      0.762      0.446
-    PURSUE$1           0.525      0.297      1.769      0.077
-    BOYS$1             3.166      0.722      4.385      0.000
+    M1$1              -3.233      0.731     -4.421      0.000
+    M2$1             -15.000      0.000    999.000    999.000
+    M3$1              -2.140      0.460     -4.650      0.000
+    M4$1              -2.345      0.504     -4.649      0.000
+    DISLIKE$1          2.519      0.525      4.801      0.000
+    PURSUE$1          -0.951      0.306     -3.104      0.002
 
 Categorical Latent Variables
 
  Means
-    C#1                0.079      0.200      0.395      0.693
+    C#1               -0.080      0.200     -0.403      0.687
 
 
 QUALITY OF NUMERICAL RESULTS
@@ -398,50 +392,44 @@ RESULTS IN PROBABILITY SCALE
 Latent Class 1
 
  M1
-    Category 1         0.038      0.027      1.419      0.156
-    Category 2         0.962      0.027     36.091      0.000
+    Category 1         0.809      0.057     14.109      0.000
+    Category 2         0.191      0.057      3.341      0.001
  M2
-    Category 1         0.000      0.000      0.000      1.000
-    Category 2         1.000      0.000      0.000      1.000
+    Category 1         0.910      0.043     21.143      0.000
+    Category 2         0.090      0.043      2.081      0.037
  M3
-    Category 1         0.105      0.043      2.414      0.016
-    Category 2         0.895      0.043     20.642      0.000
+    Category 1         0.897      0.044     20.465      0.000
+    Category 2         0.103      0.044      2.338      0.019
  M4
-    Category 1         0.087      0.040      2.165      0.030
-    Category 2         0.913      0.040     22.719      0.000
+    Category 1         0.917      0.040     23.041      0.000
+    Category 2         0.083      0.040      2.093      0.036
  DISLIKE
-    Category 1         0.926      0.036     25.569      0.000
-    Category 2         0.074      0.036      2.057      0.040
+    Category 1         0.555      0.072      7.752      0.000
+    Category 2         0.445      0.072      6.221      0.000
  PURSUE
-    Category 1         0.279      0.062      4.521      0.000
-    Category 2         0.721      0.062     11.706      0.000
- BOYS
-    Category 1         0.888      0.043     20.574      0.000
-    Category 2         0.112      0.043      2.596      0.009
+    Category 1         0.629      0.069      9.062      0.000
+    Category 2         0.371      0.069      5.354      0.000
 
 Latent Class 2
 
  M1
-    Category 1         0.808      0.057     14.080      0.000
-    Category 2         0.192      0.057      3.344      0.001
+    Category 1         0.038      0.027      1.422      0.155
+    Category 2         0.962      0.027     36.027      0.000
  M2
-    Category 1         0.910      0.043     21.010      0.000
-    Category 2         0.090      0.043      2.087      0.037
+    Category 1         0.000      0.000      0.000      1.000
+    Category 2         1.000      0.000      0.000      1.000
  M3
-    Category 1         0.897      0.044     20.463      0.000
-    Category 2         0.103      0.044      2.339      0.019
+    Category 1         0.105      0.043      2.428      0.015
+    Category 2         0.895      0.043     20.645      0.000
  M4
-    Category 1         0.917      0.040     23.000      0.000
-    Category 2         0.083      0.040      2.094      0.036
+    Category 1         0.087      0.040      2.173      0.030
+    Category 2         0.913      0.040     22.660      0.000
  DISLIKE
-    Category 1         0.555      0.072      7.754      0.000
-    Category 2         0.445      0.072      6.217      0.000
+    Category 1         0.925      0.036     25.569      0.000
+    Category 2         0.075      0.036      2.059      0.039
  PURSUE
-    Category 1         0.628      0.069      9.062      0.000
-    Category 2         0.372      0.069      5.359      0.000
- BOYS
-    Category 1         0.960      0.028     34.222      0.000
-    Category 2         0.040      0.028      1.444      0.149
+    Category 1         0.279      0.062      4.524      0.000
+    Category 2         0.721      0.062     11.711      0.000
 
 
 LATENT CLASS INDICATOR ODDS RATIOS FOR THE LATENT CLASSES
@@ -452,46 +440,42 @@ LATENT CLASS INDICATOR ODDS RATIOS FOR THE LATENT CLASSES
 Latent Class 1 Compared to Latent Class 2
 
  M1
-    Category > 1     107.091     88.139     21.339    537.435
+    Category > 1       0.009      0.008      0.002      0.047
  M2
-    Category > 1   *********      0.000  *********  *********
+    Category > 1       0.000      0.000      0.000      0.000
  M3
-    Category > 1      74.801     49.353     20.525    272.605
+    Category > 1       0.013      0.009      0.004      0.049
  M4
-    Category > 1     115.276     84.230     27.528    482.733
+    Category > 1       0.009      0.006      0.002      0.036
  DISLIKE
-    Category > 1       0.100      0.060      0.031      0.326
+    Category > 1       9.965      5.985      3.071     32.340
  PURSUE
-    Category > 1       4.378      1.875      1.892     10.134
- BOYS
-    Category > 1       2.991      2.520      0.573     15.597
+    Category > 1       0.228      0.098      0.099      0.528
 
 
 MODEL COMMAND WITH FINAL ESTIMATES USED AS STARTING VALUES
 
      %OVERALL%
 
-     [ c#1*0.07887 ];
+     [ c#1*-0.08044 ];
 
      %C#1%
 
-     [ m1$1*-3.23619 ];
-     [ m2$1*-15 ];
-     [ m3$1*-2.14602 ];
-     [ m4$1*-2.35076 ];
-     [ dislike$1*2.52007 ];
-     [ pursue$1*-0.95140 ];
-     [ boys$1*2.07008 ];
+     [ m1$1*1.44063 ];
+     [ m2$1*2.31833 ];
+     [ m3$1*2.16960 ];
+     [ m4$1*2.39851 ];
+     [ dislike$1*0.21998 ];
+     [ pursue$1*0.52622 ];
 
      %C#2%
 
-     [ m1$1*1.43749 ];
-     [ m2$1*2.30924 ];
-     [ m3$1*2.16882 ];
-     [ m4$1*2.39657 ];
-     [ dislike$1*0.22091 ];
-     [ pursue$1*0.52530 ];
-     [ boys$1*3.16561 ];
+     [ m1$1*-3.23255 ];
+     [ m2$1*-15 ];
+     [ m3$1*-2.14035 ];
+     [ m4$1*-2.34461 ];
+     [ dislike$1*2.51909 ];
+     [ pursue$1*-0.95106 ];
 
 
 
@@ -505,16 +489,16 @@ TECHNICAL 11 OUTPUT
 
      VUONG-LO-MENDELL-RUBIN LIKELIHOOD RATIO TEST FOR 1 (H0) VERSUS 2 CLASSES
 
-          H0 Loglikelihood Value                         -440.027
-          2 Times the Loglikelihood Difference            237.578
-          Difference in the Number of Parameters                8
-          Mean                                             -0.163
-          Standard Deviation                               17.281
+          H0 Loglikelihood Value                         -411.903
+          2 Times the Loglikelihood Difference            235.658
+          Difference in the Number of Parameters                7
+          Mean                                             -1.304
+          Standard Deviation                               16.882
           P-Value                                          0.0000
 
      LO-MENDELL-RUBIN ADJUSTED LRT TEST
 
-          Value                                           231.339
+          Value                                           228.612
           P-Value                                          0.0000
 
 
@@ -536,15 +520,15 @@ TECHNICAL 14 OUTPUT
 
      PARAMETRIC BOOTSTRAPPED LIKELIHOOD RATIO TEST FOR 1 (H0) VERSUS 2 CLASSES
 
-          H0 Loglikelihood Value                         -440.027
-          2 Times the Loglikelihood Difference            237.578
-          Difference in the Number of Parameters                8
+          H0 Loglikelihood Value                         -411.903
+          2 Times the Loglikelihood Difference            235.658
+          Difference in the Number of Parameters                7
           Approximate P-Value                              0.0000
           Successful Bootstrap Draws                            5
 
 
-     Beginning Time:  15:25:19
-        Ending Time:  15:25:19
+     Beginning Time:  19:31:51
+        Ending Time:  19:31:51
        Elapsed Time:  00:00:00
 
 

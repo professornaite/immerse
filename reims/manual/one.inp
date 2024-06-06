@@ -1,0 +1,28 @@
+TITLE:
+STEP 1 - THREE-STEP USING LSAL
+DATA:
+FILE = "/Users/nathanalexander/Dropbox/Projects/immerse/reims/manual/
+Step1.dat"; 
+VARIABLE:
+NAMES = m1 m2 m3 m4 dislike pursue boys female age; 
+ MISSING=.;
+ categorical = m1-pursue;
+    usevar = m1-pursue;
+    classes = c(3);
+    
+    auxiliary = ! list all potential covariates and distals here
+    
+    female  ! covariate
+    age     ! covariate
+ANALYSIS:
+estimator = mlr;
+    type = mixture;
+    starts = 500 100;
+OUTPUT:
+residual tech11 tech14
+SAVEDATA:
+File=3step_savedata.dat;
+    Save=cprob;
+PLOT:
+type = plot3;
+    series = m1-pursue(*);
