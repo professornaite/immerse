@@ -865,12 +865,12 @@ Integrate covariates and with the mixture model
 tribble(
   ~"Name", ~"Variable Description",
   #----------|----------|,
-  "mathperson1","text.",
-  "mathperson2","text.",
-  "mathperson3","text.",
-  "mathperson4","text.",
-  "dislikemathclass","text.",
-  "pursuestem","text.",
+  "mathperson1","I am a math person.",
+  "mathperson2","My peers think I am a math person.",
+  "mathperson3","My teachers think I am a math person.",
+  "mathperson4","There are a lot of people who think I am a math person.",
+  "dislikemathclass","In general, I dislike math classes.",
+  "pursuestem","If given the chance, I will pursue a STEM career.",
   "female","Self-reported sex (0=male, 1=female)",
   "age", "Self-reporeted age") %>% 
   gt() %>% 
@@ -883,14 +883,15 @@ tribble(
 
 ```
 
-### Step 1: Class enumeration with auxilary specification
 
 ```{r}
-# add female variable from original reims data
+# add female variable from original data set
+# the variables were not included in the subset data
 reims$sex
 reims1$female <- reims$sex
 reims1$age <- reims$age
 ```
+### Step 1: Class enumeration with auxilary specification
 
 ```{r, eval = F}
 
@@ -903,8 +904,7 @@ step1 <- mplusObject(
     
     auxiliary = ! list all potential covariates and distals here
     
-    female  ! covariate
-    age     ! covariate",
+    female  ! covariate",
   
   ANALYSIS = 
     "estimator = mlr;
@@ -939,6 +939,97 @@ source("plot_lca.txt")
 output_reims1 <- readModels(here("manual","one.out"))
 
 plot_lca(model_name = output_reims1)
+```
+
+### Step 2: Determine measurement error
+
+we want to extract the logits for the classification probabilities for the most likely latent class.
+
+```{r}
+
+logic_cprobs <- as.data.frame(output_reims1[["class_counts"]]
+                              
+                              [["logitProbs.mostLikely"]])
+```
+
+we now extract the saved data set.
+
+```{r}
+
+savedata <- as.data.frame(output_reims1[["savedata"]])
+```
+
+we then rename the column in savedata named "c" and change to "N"
+
+```{r}
+colnames(savedata)[colnames(savedata)=="C"] <- "N"
+```
+
+### Step 3: Add auxiliary variables to analysis
+
+Model 1 with female as covariate (to see if there are differences by sex). There are no distal outcomes included in this sample model. 
+
+I will model the auxilary variable with 3 classes first.
+
+```{r, eval = F}
+
+step3 <- mplusObject(
+  
+  TITLE = "STEP 3 - 3STEP LSAY",
+  
+  VARIABLE = 
+  "nominal=N;
+  usevar = n;
+  classes = c(3); 
+  
+  usevar = female;",
+  
+  ANALYSIS =
+  "estimator = mlr;
+  type = mixture;
+  starts = 0;", 
+  
+  MODEL =
+    glue(
+      " %OVERALL%
+      
+      C on female (f1-f2); ! covariate as predictor of C
+      
+      %C#1%
+      [n#1@{logit_cprobs[1,1]}];
+      [n#2@{logit_cprobs[1,2]}];
+      
+      %C#2%
+      [n#1@{logit_cprobs[2,1]}];
+      [n#2@{logit_cprobs[2,2]}];
+      
+      %C#3%
+      [n#1@{logit_cprobs[3,1]}];
+      [n#2@{logit_cprobs[3,2]}];",
+      
+      MODELTEST = "
+      m1=m2;
+      m2=m3;
+      !f1=f2;
+      !f2=f3;
+      ",
+      
+    MODELCONSTRAINT = 
+      "New (diff12 diff13 diff23);
+  
+      diff12 = m1-m2; ! test pairwise distal mean differences
+      diff13 = m1-m3;
+      diff23 = m2-m3;",
+  
+    usevariables = colnames(savedata),
+    rdata = savedata)
+  
+  
+step3_fit <- mplusModeler(step3,
+                            dataout=here("manual", "Step3.dat"),
+                            modelout=here("manual","three.inp"),
+                            check=T, run=T, hashfilename = F)
+
 ```
 
 ---

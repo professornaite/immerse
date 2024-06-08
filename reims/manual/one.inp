@@ -13,7 +13,6 @@ NAMES = m1 m2 m3 m4 dislike pursue boys female age;
     auxiliary = ! list all potential covariates and distals here
     
     female  ! covariate
-    age     ! covariate
 ANALYSIS:
 estimator = mlr;
     type = mixture;

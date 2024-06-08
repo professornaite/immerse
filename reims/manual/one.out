@@ -1,6 +1,6 @@
 Mplus VERSION 8.11 (Mac)
 MUTHEN & MUTHEN
-06/05/2024   7:57 PM
+06/08/2024   1:59 PM
 
 INPUT INSTRUCTIONS
 
@@ -19,7 +19,6 @@ INPUT INSTRUCTIONS
       auxiliary = ! list all potential covariates and distals here
 
       female  ! covariate
-      age     ! covariate
   ANALYSIS:
   estimator = mlr;
       type = mixture;
@@ -58,7 +57,7 @@ Observed dependent variables
    M1          M2          M3          M4          DISLIKE     PURSUE
 
 Observed auxiliary variables
-   FEMALE      AGE
+   FEMALE
 
 Categorical latent variables
    C
@@ -600,23 +599,22 @@ SAVEDATA INFORMATION
     DISLIKE        F10.3
     PURSUE         F10.3
     FEMALE         F10.3
-    AGE            F10.3
     CPROB1         F10.3
     CPROB2         F10.3
     CPROB3         F10.3
     C              F10.3
 
   Save file format
-    12F10.3
+    11F10.3
 
   Save file record length    10000
 
   Save missing symbol        *
 
 
-     Beginning Time:  19:57:13
-        Ending Time:  19:57:14
-       Elapsed Time:  00:00:01
+     Beginning Time:  13:59:43
+        Ending Time:  13:59:45
+       Elapsed Time:  00:00:02
 
 
 
