@@ -1026,9 +1026,9 @@ step3 <- mplusObject(
   
   
 step3_fit <- mplusModeler(step3,
-                            dataout=here("manual", "Step3.dat"),
-                            modelout=here("manual","three.inp"),
-                            check=T, run=T, hashfilename = F)
+               dataout=here("manual", "Step3.dat"), 
+               modelout=here("manual", "three.inp"), 
+               check=TRUE, run = TRUE, hashfilename = FALSE)
 
 ```
 
