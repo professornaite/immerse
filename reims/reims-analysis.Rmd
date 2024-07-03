@@ -3,9 +3,9 @@ title: "REIMS sample analysis"
 author: "Nathan Alexander"
 date: "2024-06-03"
 output:
+  pdf_document: default
   html_document:
     theme: flatly
-  pdf_document: default
 editor_options:
   markdown:
     wrap: sentence
