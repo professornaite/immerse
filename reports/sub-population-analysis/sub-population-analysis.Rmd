@@ -1,0 +1,215 @@
+---
+title: "Subpopulation analysis of race and ethnicity in complex survey data"
+author: "Nathan Alexander"
+output: 
+  html_document:
+    self_contained: yes
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+------------------------------------------------------------------------
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Use outline and rework content for intro sections from [here](https://www.dropbox.com/scl/fi/fbiquhrn7o1jcwl0bl4o4/Mind-the-Gap-IUME-December-5-2013_final.pptx?rlkey=mm6wel3wyn79nyekdms23y4dq&dl=0)
+
+## Abstract
+
+Research on subpopulation data in complex survey designs is a common
+practice in statistics. Despite a wealth of resources on the issues in
+the measurement and standard error inaccuracies in subset population
+data, few studies provide an understanding of measurement in the context
+of group-based outcomes. Decades of research on eugenics and racialized
+statistical methodologies has set a solid foundation to the issue of
+measuring race in statistics. This critique includes important reminders
+about the philosophy, theory, bias, and measurement issues of
+\`\`race-based" analyses in statistics. The central role of statistics
+and measurement in modern policy discourse around race-based group
+outcomes, however, has not changed. As new frameworks around critical
+inquiry and statistical methods continue to expand, this article
+provides a review of the literature and measurement components of race
+and ethnicity in complex survey data. We discuss implications in
+relation to racialization and the construction of subpopulations,
+subgroups, and domains in complex survey data. We use data from two U.S.
+nationally-represntative complex surveys studies and provide
+implications for policy and researcher practice.
+
+#### Keywords
+
+Subgroup, domain, variance, survey, complex design
+
+# Overview
+
+This document details some technical foundations and data related to the
+analysis of a sub-population in complex survey data.
+
+If $p$ is the proportion who are Black and $(1-p)$ is the proportion who
+are not Black, and $$ \bar{X} = p\bar{X}_d + (1-p)\bar{X}_a $$
+<https://stats.stackexchange.com/questions/30562/how-to-test-whether-subgroup-mean-differs-from-overall-group-that-includes-the>
+
+### Race
+
+The minimum categories established in the OMB 1997 Standard are
+
+-   Race
+
+    -- American Indian or Alaska Native (AIAN): A person having origins
+    in any of the original peoples of North and South America (including
+    Central America), and who maintains tribal affiliation or community
+    attachment.
+
+    -- Asian: A person having origins in any of the original peoples of
+    the Far East, Southeast Asia, or the Indian subcontinent, including,
+    for example, Cambodia, China, India, Japan, Korea, Malaysia,
+    Pakistan, the Philippine Islands, Thailand and Vietnam.
+
+    -- Black or African American: A person having origins in any of the
+    black racial groups of Africa. Terms such as "Haitian" or "Negro"
+    can be used in addition to "Black or African American."
+
+    -- Native Hawaiian or Other Pacific Islander (NHOPI): A person
+    having origins in any of the original peoples of Hawaii, Guam,
+    Samoa, or other Pacific Islands.
+
+    -- White: A person having origins in any of the original peoples of
+    Europe, the Middle East, or North Africa
+
+-   Ethnic Group
+
+    -- Hispanic or Latino: A person of Cuban, Mexican, Puerto Rican,
+    South or Central American or other Spanish culture or origin,
+    regardless of race. The term "Spanish origin" can be used in
+    addition to "Hispanic or Latino."
+
+## Homogeneity
+
+The hypothesis of homogeneity
+$$ $$
+
+## Individual-level data
+
+Think of the case when a respondent is multiracial; how do you subset
+the data?
+
+Focus on results of data reduction through listwise deletion.
+
+## Household data
+
+Imputation and race; to show the differences when head of household is a
+different race than the respondent.
+
+## Complex survey data
+
+Using complex survey design and the various assumptions.
+
+### Subset option
+
+Incorrect; without the original data and only the subset data, the
+standard errors will be wrong.
+
+### Subpopulation option
+
+Using a subpopulation function to measure statistics and standard
+errors.
+
+## Data
+
+We use two data sets to examine subpopulation analysis in complex survey
+data. The first set of examples come from the 2009 *High School
+Longitudinal Study* (HSLS:09), which initially surveyed respondents in
+their first year of high school. The second set of examples come from
+the *General Social Survey* (GSS), which collects data from U.S.
+citizens every two years.
+
+```{r cars}
+summary(cars)
+```
+
+### Data
+
+#### High School Longitudinal Survey (HSLS)
+
+```{r hsls}
+#| my-chunk, echo = FALSE, fig.width = 10,
+#| fig.cap = "This is a long long
+#|   long long caption."
+
+plot(cars)
+```
+
+#### General Social Survey (GSS)
+
+```{r gss}
+#| echo = FALSE, fig.width = 10,
+#| fig.cap = "This is a long long
+#|   long long caption."
+
+plot(cars)
+```
+
+## Subpopulation estimates
+
+### Ratio estimators
+
+```{r ratio-estimators, echo=FALSE}
+# https://cran.r-project.org/web/packages/survey/vignettes/domain.pdf
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to
+prevent printing of the R code that generated the plot.
+
+### Sampling weights for subpopulations
+
+We can use the `subset()` function in the *survey* `package` to handle
+sub-populations. Other analysts have suggested that the `lavaan.survey`
+uses the survey package to get various metrics about the population. Of
+interest here are the standard errors for the population matrix.
+
+# Results
+
+### Base models
+
+### Latent variable models
+
+### Time-series models
+
+# Discussion
+
+# Conclusion
+
+# References
+
+<https://www.cdc.gov/nchs/data/natmedcare/nmc_a_04acc.pdf>
+
+Horton N. J., and Kleinman K. P. 2007. Much ado about nothing: A
+comparison of missing data methods and software to fit incomplete data
+regression models. American Statistician 61: 79–90.
+
+Lee E. S., and Forthofer R. N. 2005. Analyzing Complex Survey Data. 2nd
+ed. Thousand Oaks, CA: Sage.
+
+West, B. T., Berglund, P., & Heeringa, S. G. (2008). A Closer
+Examination of Subpopulation Analysis of Complex-Sample Survey Data. The
+Stata Journal, 8(4), 520-531.
+<https://doi.org/10.1177/1536867X0800800404>
+
+<https://stats.oarc.ucla.edu/r/seminars/survey-data-analysis-with-r/>
+
+<https://doh.wa.gov/sites/default/files/legacy/Documents/1500/RaceEthnGuidelines.pdf>
+
+<https://cran.r-project.org/web/packages/survey/vignettes/domain.pdf>
+
+<https://www.bookdown.org/rwnahhas/RMPH/survey-domain.html>
+
+[1]
+<https://www.researchgate.net/publication/316865660_Introduction_to_the_Design_and_Analysis_of_Complex_Survey_Data>
+[2]
+<https://stats.oarc.ucla.edu/stata/seminars/survey-data-analysis-in-stata-17/>
+[3] <https://faculty.washington.edu/tlumley/survey-jsm-nup.pdf> [4]
+<https://academic.oup.com/jssam/article/11/4/743/7136601> [5]
+<https://doh.wa.gov/sites/default/files/legacy/Documents/1500/RaceEthnGuidelines.pdf>

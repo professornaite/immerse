@@ -416,7 +416,7 @@ fit_table
 
 ```
 
-save the table:
+We save the table:
 
 ```{r}
 gtsave(fit_table, here("figures", "fit_table.png"))
