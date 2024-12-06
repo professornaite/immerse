@@ -1,8 +1,8 @@
 TITLE:
 REIMS Mathematics Identity Model 2
 DATA:
-FILE = "/Users/nathanalexander/Dropbox/Projects/immerse/reims/mplus/
-reims1.dat"; 
+FILE = "/Users/nathanalexander/Dropbox/Projects/immerse/reims/mplus/reims1.dat";
+ 
 VARIABLE:
 NAMES = m1 m2 m3 m4 dislike pursue boys; 
  MISSING=.;

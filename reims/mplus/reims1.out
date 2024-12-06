@@ -1,14 +1,14 @@
 Mplus VERSION 8.11 (Mac)
 MUTHEN & MUTHEN
-06/27/2024   2:38 PM
+08/29/2024  11:48 PM
 
 INPUT INSTRUCTIONS
 
   TITLE:
   REIMS Mathematics Identity Model 2
   DATA:
-  FILE = "/Users/nathanalexander/Dropbox/Projects/immerse/reims/mplus/
-  reims1.dat";
+  FILE = "/Users/nathanalexander/Dropbox/Projects/immerse/reims/mplus/reims1.dat";
+
   VARIABLE:
   NAMES = m1 m2 m3 m4 dislike pursue boys;
    MISSING=.;
@@ -566,8 +566,8 @@ The following plots are available:
   Scatterplots (sample values)
   Sample proportions and estimated probabilities
 
-     Beginning Time:  14:38:39
-        Ending Time:  14:38:39
+     Beginning Time:  23:48:41
+        Ending Time:  23:48:41
        Elapsed Time:  00:00:00
 
 

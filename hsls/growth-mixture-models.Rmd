@@ -1,0 +1,125 @@
+---
+title: "Growth Mixture Modeling"
+author: "Nathan Alexander"
+output:
+  html_document:
+    theme: flatly
+  pdf_document: default
+editor_options:
+  markdown:
+    wrap: sentence
+---
+
+# Set up
+
+### Set up `MPlusAutomation`
+
+```{r, eval=F}
+install.packages("devtools")
+library(devtools)
+
+install_github("michaelhallquist/MplusAutomation")
+```
+
+### Load packages
+
+```{r, echo=F, eval=T, warning=F}
+library(MplusAutomation)
+library(tidyverse) #collection of R packages designed for data science
+library(here) #helps with filepaths
+library(gt) # creates tables
+library(DiagrammeR) # create path diagrams
+library(data.table) # use for `melt()` function
+here::i_am("growth-mixture-models.Rmd")
+```
+
+### Data
+
+```{r, echo=T, eval=T, warning=F}
+# set data
+hsls <- read_csv(here("data", "hsls_09_school_v1_0.csv"))
+```
+
+
+```{r, echo=F, eval=T, warning=F}
+# inspect data
+hsls
+names(hsls)
+```
+
+#### Make updates/edits to data
+
+We observe some of the other tags on our data. We also look at the distribution of some values. Take note that we changed the variable names (thanks Dina!) to less than eight characters so that our model could run.
+
+```{r, echo=T, eval=T, warning=F}
+# view distribution of indicator variables
+summary(hsls)
+
+# subset data
+
+
+```
+
+# Overview
+
+Notes from Karen.
+
+Longitduinal model of change thaat builds on the growth model.
+
+Requires:
+
+- Set of repeated measures of time
+
+- At least 3 time points (ideally more)
+
+- Sample size large enough to identify subgroup change
+
+Basic premise: There is heterogentiy in change within a population and identify it helps us betteer understand change/development. 
+
+Different growth populations that have different trajectories and growth.
+
+Builds on growth model, then relaxes assumption of a single intercept and a single slope - estimting multiple parameters.
+
+# Technical details
+
+Intercepts have to be set at 1.
+
+Time slopes have to be set in intervals (two intervals between time points) to be able to talk about change per year.
+
+Single indicator per time and we are modeling change in that... Having factors at each time point is different than having an observed variable.
+
+Commonly used with more stable traits, as opposed to more abrupt changes.
+
+Models with 4 or more times points is preffered, however, 3 time points can be estimated.
+
+# Estimation
+
+Parameter is used to think about change across time.
+
+Slope parameter is where they start and variation is an important topic of study here.
+
+The growth and heterogeneity across groups can help us model differences.
+
+A single line in between represents the mean $\bar{x}$ of the data.
+
+The variance, however, is an important tool for understanding.
+
+*Question from Stephen: Is there a large difference between GMM and Latent Difference Scores (with 3 time points)?* Answer by Karen: there is a different parametization of the growth model; it is more common with growth model and not the mixture model. Maybe a single line is not a sufficient way to describe the mess, for example, of the different trajectories of students. They are simply different ways that we can model change over time.
+
+# Model
+
+GMM are on the trajectories of students in mathematics (as opposed to their background factors).
+
+This is then connected to an outcome, dropout in Karen's example.
+
+This can help intervention implementation (especially as students make the transition to college).
+
+Can be then extended to multi-level covariatates (schools; districts) to parse out student variability to site variability.
+
+SEE GMM Modeling Overview slide.
+
+---
+
+This file is based on resources provided by the Institute of Mixture Modeling for Equity-Oriented Researchers, Scholars, and Educators (2024). IMMERSE In-Person Training Workshop (IES No. 305B220021).
+Institute of Education Sciences.
+<https://immerse-ucsb.github.io/pre-training>
