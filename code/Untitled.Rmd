@@ -1,0 +1,60 @@
+---
+title: "Racial Heterogeneity and Mathematics Identity: A Mixture Modeling Perspective"
+author: "Nathan Alexander"
+output:
+  html_document:
+    theme: flatly
+  pdf_document: default
+editor_options:
+  markdown:
+    wrap: sentence
+---
+
+```{r, include=F, eval=F}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+install.packages("devtools")
+library(devtools)
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+library(lcmm) # For mixture models
+library(poLCA) # For latent class analysis
+library(flexmix) # For finite mixture regression
+library(kableExtra) # For nice tables
+library(MplusAutomation)
+library(here) #helps with filepaths
+library(gt) # creates tables
+library(DiagrammeR) # create path diagrams
+library(data.table) # use for `melt()` function
+here::i_am("Untitled.Rmd")
+```
+
+```{r, include=F}
+data <- read.csv("../data/hsls2017_pets_v1/student.csv")
+```
+
+```{r, include=F}
+math_id <- data %>% 
+  dplyr::select(STU_ID,
+                X4UNIV1, # X4 Sample member status in BY, F1, U13,  HS transcript, and F2 rounds
+                W4W1STU, # Student Longitudinal Analytic Weight, BY-F2
+                X1SEX,
+                X1RACE,
+                X1BLACK,
+                S1MPERSON1, # 9th grader sees himself/herself as a math person
+                S1MPERSON2, # Others see 9th grader as a math person
+                S2MPERSON1, # Teen sees himself/herself as a math person
+                S2MPERSON2, # Others see teen as a math person
+                S4MPERSON1, # Teen sees himself/herself as a math person
+                S4MPERSON2 # Others see teen as a math person
+                )
+str(math_id)
+```
+
+
+```{r}
+
+
+```
+
+
